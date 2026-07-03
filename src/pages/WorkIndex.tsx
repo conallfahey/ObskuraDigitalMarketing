@@ -203,9 +203,9 @@ export default function WorkIndex() {
         <div className="flex items-center gap-3">
           <Link to="/">
             <img
-              src="/images/ObskuraDots.png"
+              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
               alt="Obskura Logo"
-              className="h-8 object-contain saturate-200"
+              className="h-9 object-contain saturate-200"
             />
           </Link>
           <Link to="/" className="text-xl font-bold tracking-tight">

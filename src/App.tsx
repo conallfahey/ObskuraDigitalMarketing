@@ -186,9 +186,9 @@ export default function App() {
         <div className="flex items-center gap-3">
           <Link to="/">
             <img
-              src="/images/ObskuraDots.png"
+              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
               alt="Obskura Logo"
-              className="h-8 object-contain saturate-200"
+              className="h-9 object-contain saturate-200"
             />
           </Link>
           <Link to="/" className="text-xl font-bold tracking-tight">
@@ -492,8 +492,8 @@ export default function App() {
             <div className="flex flex-col">
               <h3 className="text-4xl font-serif italic mb-2">Comfort Moving Chicago</h3>
               <p className="text-xl font-medium text-text-dark/70 border-b border-text-dark/10 pb-6 mb-8">
-                Built a stronger local search presence, a custom lead-management system, and a
-                paid social pipeline that delivered 8x ROAS in the first two months.
+                Connected ad creative creation, Meta ads management, custom CRM infrastructure,
+                and SEO into one growth system that delivered 16x ROAS in the first two months.
               </p>
 
               <div className="mb-6">
@@ -501,9 +501,9 @@ export default function App() {
                   The Problem
                 </h4>
                 <p className="font-medium">
-                  Low control over lead flow, inconsistent local search visibility, and too much
-                  reliance on aggregator platforms that cut into margin and limit long-term brand
-                  growth.
+                  Word-of-mouth referrals and flyers created some momentum, but they were
+                  inconsistent and difficult to rely on while local search visibility and lead
+                  follow-up needed a stronger system.
                 </p>
               </div>
 
@@ -524,6 +524,10 @@ export default function App() {
                     <span className="text-accent">&rarr;</span> Built a custom CRM and unified website,
                     quote, and Meta ad leads into one pipeline.
                   </li>
+                  <li className="flex gap-3">
+                    <span className="text-accent">&rarr;</span> Created ad assets, managed Meta
+                    campaigns, and used CRM data to tighten follow-up.
+                  </li>
                 </ul>
               </div>
 
@@ -534,7 +538,7 @@ export default function App() {
                 <ul className="space-y-4 font-mono text-sm">
                   <li className="flex justify-between items-center border-b border-text-dark/10 pb-2">
                     <span className="text-text-dark/60">Paid Media Performance</span>
-                    <span className="font-bold">8x ROAS</span>
+                    <span className="font-bold">16x ROAS</span>
                   </li>
                   <li className="flex justify-between items-center border-b border-text-dark/10 pb-2">
                     <span className="text-text-dark/60">Lead Management</span>

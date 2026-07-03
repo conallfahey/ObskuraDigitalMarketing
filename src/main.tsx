@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
 import ComfortMovingCaseStudy from './pages/ComfortMovingCaseStudy.tsx'
+import ProposalPage from './pages/ProposalPage.tsx'
 import WorkIndex from './pages/WorkIndex.tsx'
 
 createRoot(document.getElementById('root')!).render(
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/work-index" element={<WorkIndex />} />
         <Route path="/case-studies/comfort-moving-chicago" element={<ComfortMovingCaseStudy />} />
+        <Route path="/proposals/umbrella-restoration" element={<ProposalPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
