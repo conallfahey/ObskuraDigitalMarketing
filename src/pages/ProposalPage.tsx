@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   BarChart3,
+  Camera,
   Check,
   ClipboardList,
   Film,
@@ -16,6 +17,8 @@ import {
   ShieldCheck,
   Sparkles,
   TimerReset,
+  UserRoundCheck,
+  X,
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,21 +26,19 @@ gsap.registerPlugin(ScrollTrigger);
 const PROPOSAL_PASSWORD = 'umbrella2026';
 const STORAGE_KEY = 'obskura-umbrella-proposal-unlocked';
 
-const unsplash = (photoId: string, width = 1600) =>
-  `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=${width}&q=82`;
+const umbrellaImageBase = '/images/Home - Umbrella Construction & Restoration';
 
 const proposalImages = {
-  hero: unsplash('photo-1504307651254-35680f356dfd', 1900),
-  strategy: unsplash('photo-1600585154340-be6161a56a0c'),
-  seo: unsplash('photo-1503387762-592deb58ef4e'),
-  local: unsplash('photo-1560518883-ce09059eeffa'),
-  roofing: unsplash('photo-1541888946425-d81bb19240f5'),
-  content: unsplash('photo-1497366754035-f200968a6e72'),
-  ads: unsplash('photo-1516321318423-f06f85e504b3'),
-  video: unsplash('photo-1492691527719-9d1e07e534b4'),
-  reporting: unsplash('photo-1460925895917-afdab827c52f'),
-  plan: unsplash('photo-1551288049-bebda4e38f71'),
-  next: unsplash('photo-1497366811353-6870744d04b2'),
+  hero: `${umbrellaImageBase}/umbrella-construction-restoration-hero-bg-2.jpg`,
+  heroSlide: `${umbrellaImageBase}/umbrella-construction-restoration-hero-slide-2.jpg`,
+  logo: `${umbrellaImageBase}/umbrella-construction-restoration-hero-logo.png`,
+  seo: `${umbrellaImageBase}/umbrella-house-renovation-600x300.jpg`,
+  local: `${umbrellaImageBase}/House2-600x300.jpg`,
+  roofing: `${umbrellaImageBase}/House-renovation-600x300-1-600x300.jpg`,
+  content: `${umbrellaImageBase}/interior5-600x300.jpg`,
+  ads: `${umbrellaImageBase}/slider01-600x300.jpg`,
+  video: `${umbrellaImageBase}/umbrella-construction-drone-inspection-600x300.jpg`,
+  reporting: `${umbrellaImageBase}/architecture-426426_1280-600x300.jpg`,
 };
 
 const goals = [
@@ -143,6 +144,20 @@ const blogTopics = [
   'How Long Does a Roof Insurance Claim Take?',
   'Best Roofing Materials for Illinois Weather',
   'Should You Get a Roof Inspection After a Severe Storm?',
+];
+
+const ownerLeadershipItems = [
+  'Short expert videos explaining storm damage, roofing decisions, inspections, and insurance-adjacent questions in plain English.',
+  'Founder-led posts that make Umbrella feel experienced, local, and accountable instead of faceless.',
+  'Commentary after major storms or seasonal weather shifts so homeowners know what to look for and when to call.',
+  'Reusable clips and quotes for the website, Google Business Profile, social posts, retargeting ads, and email follow-up.',
+];
+
+const photographyNeeds = [
+  'Owner and team portraits',
+  'Inspection and drone photos',
+  'Jobsite process photos',
+  'Finished exterior details',
 ];
 
 const campaignTypes = [
@@ -415,7 +430,7 @@ const proposalSections = [
   {
     number: '01',
     title: 'Overview',
-    image: proposalImages.strategy,
+    image: proposalImages.heroSlide,
     summary:
       'Build a clearer local acquisition system for roofing, storm damage, inspection, and exterior restoration work.',
     points: ['No vanity metrics', 'No inflated reporting', 'Lead quality over empty clicks'],
@@ -495,6 +510,143 @@ function SectionKicker({
     >
       <span className="text-accent">Section {number}</span> / {label}
     </p>
+  );
+}
+
+function RotatingSearchList({
+  eyebrow,
+  title,
+  items,
+  helperText,
+  modalTitle,
+}: {
+  eyebrow: string;
+  title: string;
+  items: string[];
+  helperText?: string;
+  modalTitle: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [typedLength, setTypedLength] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const activeItem = items[activeIndex] ?? '';
+  const visibleText = activeItem.slice(0, typedLength);
+
+  useEffect(() => {
+    if (!items.length) {
+      return;
+    }
+
+    const delay = typedLength >= activeItem.length ? 1350 : 42;
+    const timeoutId = window.setTimeout(() => {
+      if (typedLength >= activeItem.length) {
+        setActiveIndex((currentIndex) => (currentIndex + 1) % items.length);
+        setTypedLength(0);
+        return;
+      }
+
+      setTypedLength((currentLength) => currentLength + 1);
+    }, delay);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [activeItem.length, items.length, typedLength]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
+  return (
+    <>
+      <div className="proposal-animate-card rounded-[1.25rem] border border-text-dark/10 bg-background p-7 md:p-8 transition-transform duration-300 hover:-translate-y-1">
+        <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-4">
+          {eyebrow}
+        </p>
+        <h3 className="text-3xl font-serif italic leading-tight mb-5">{title}</h3>
+        <div className="rounded-2xl border border-text-dark/10 bg-primary p-4 shadow-sm">
+          <div className="flex items-center gap-3 rounded-xl border border-text-dark/10 bg-background px-4 py-4">
+            <Search className="shrink-0 text-accent" size={18} />
+            <p className="min-h-[1.75rem] flex-1 text-base font-semibold text-text-dark/78 md:text-lg">
+              {visibleText}
+              <span className="ml-0.5 inline-block h-5 w-px translate-y-1 bg-accent"></span>
+            </p>
+          </div>
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-text-dark/45">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+            </p>
+            <button
+              type="button"
+              onClick={() => setIsOpen(true)}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-text-dark px-4 py-2 text-sm font-bold text-background transition-colors hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-background"
+            >
+              View all <ArrowRight size={15} />
+            </button>
+          </div>
+        </div>
+        {helperText && <p className="mt-5 text-text-dark/64 leading-relaxed">{helperText}</p>}
+      </div>
+
+      {isOpen ? (
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-[#111111]/72 px-5 py-8 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={`${eyebrow.replace(/\W+/g, '-').toLowerCase()}-modal-title`}
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="max-h-[86dvh] w-full max-w-3xl overflow-hidden rounded-[1.25rem] border border-[#E8E4DD]/12 bg-background shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-5 border-b border-text-dark/10 p-5 md:p-6">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-2">
+                  Full List
+                </p>
+                <h4
+                  id={`${eyebrow.replace(/\W+/g, '-').toLowerCase()}-modal-title`}
+                  className="text-2xl font-bold"
+                >
+                  {modalTitle}
+                </h4>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-text-dark/10 bg-primary text-text-dark transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Close list"
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div className="max-h-[62dvh] overflow-y-auto p-5 md:p-6">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {items.map((item, index) => (
+                  <div key={item} className="rounded-xl border border-text-dark/10 bg-primary p-4">
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+                      {String(index + 1).padStart(2, '0')}
+                    </p>
+                    <p className="font-semibold leading-relaxed text-text-dark/76">{item}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
 
@@ -709,6 +861,13 @@ export default function ProposalPage() {
         <div className="relative max-w-7xl mx-auto w-full">
           <div className="proposal-hero-content max-w-4xl">
             <div className="mb-8 flex flex-wrap items-center gap-3">
+              <span className="inline-flex rounded-full border border-text-dark/10 bg-background/92 px-4 py-2 shadow-sm backdrop-blur-sm">
+                <img
+                  src={proposalImages.logo}
+                  alt="Umbrella Construction & Restoration"
+                  className="h-7 w-auto object-contain"
+                />
+              </span>
               <span className="inline-flex items-center gap-2 rounded-full border border-text-dark/10 bg-background/90 px-4 py-2 font-mono text-xs tracking-[0.2em] uppercase text-accent shadow-sm backdrop-blur-sm">
                 <ShieldCheck size={14} /> Private Proposal
               </span>
@@ -926,68 +1085,31 @@ export default function ProposalPage() {
               </div>
             </div>
 
-            <div className="proposal-animate-card rounded-[1.25rem] border border-text-dark/10 bg-background p-7 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-4">
-                B. Service Page Buildout
-              </p>
-              <h3 className="text-3xl font-serif italic leading-tight mb-5">
-                Build pages around how customers search.
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {seoPages.map((page) => (
-                  <div
-                    key={page}
-                    className="rounded-xl border border-text-dark/10 bg-primary p-4 flex items-start gap-3"
-                  >
-                    <Check className="mt-0.5 shrink-0 text-accent" size={17} />
-                    <p className="font-semibold text-text-dark/78">{page}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <RotatingSearchList
+              eyebrow="B. Service Page Buildout"
+              title="Build pages around how customers search."
+              items={seoPages}
+              helperText="Dedicated service pages make it easier for Google and homeowners to understand exactly what Umbrella offers, where the work is available, and which page should rank for each high-intent roofing or restoration search."
+              modalTitle="Service Page Buildout Queries"
+            />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-6 mb-6">
-            <div className="proposal-animate-card rounded-[1.25rem] border border-text-dark/10 bg-background p-7 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-4">
-                Page Anatomy
-              </p>
-              <h3 className="text-3xl font-serif italic leading-tight mb-5">
-                Every service page should answer the real buying questions.
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {servicePageStructure.map((item) => (
-                  <div key={item} className="rounded-xl bg-primary border border-text-dark/10 p-4">
-                    <p className="font-semibold text-text-dark/76">{item}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-5 text-text-dark/64 leading-relaxed">
-                Google ranks individual pages, not just the homepage. If someone searches for
-                hail damage roof inspection in Algonquin, the site needs a page specifically built
-                around that topic.
-              </p>
-            </div>
+            <RotatingSearchList
+              eyebrow="Page Anatomy"
+              title="Every service page should answer the real buying questions."
+              items={servicePageStructure}
+              helperText="Google ranks individual pages, not just the homepage. If someone searches for hail damage roof inspection in Algonquin, the site needs a page specifically built around that topic."
+              modalTitle="Service Page Questions"
+            />
 
-            <div className="proposal-animate-card rounded-[1.25rem] border border-text-dark/10 bg-background p-7 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-4">
-                C. Local SEO Pages
-              </p>
-              <h3 className="text-3xl font-serif italic leading-tight mb-5">
-                Expand into nearby service areas without copy-paste pages.
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {locationPages.map((page) => (
-                  <div key={page} className="rounded-xl bg-primary border border-text-dark/10 p-4">
-                    <p className="font-semibold text-text-dark/76">{page}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-5 text-text-dark/64 leading-relaxed">
-                These pages should feel specific and useful. They should not be thin pages where
-                only the city name changes.
-              </p>
-            </div>
+            <RotatingSearchList
+              eyebrow="C. Local SEO Pages"
+              title="Expand into nearby service areas without copy-paste pages."
+              items={locationPages}
+              helperText="These pages should feel specific and useful. They should not be thin pages where only the city name changes."
+              modalTitle="Local SEO Page Queries"
+            />
           </div>
 
         </div>
@@ -1043,23 +1165,60 @@ export default function ProposalPage() {
               </div>
             </article>
 
+            <RotatingSearchList
+              eyebrow="Dedicated Educational Content"
+              title="Answer the questions that happen before the lead."
+              items={blogTopics}
+              helperText="These articles can rank for long-tail searches and give ads or service pages stronger supporting material when homeowners are still comparing options."
+              modalTitle="Educational Content Topics"
+            />
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-6 items-stretch">
             <article className="proposal-animate-card rounded-[1.25rem] border border-text-dark/10 bg-background p-7 md:p-9 transition-transform duration-300 hover:-translate-y-1">
+              <UserRoundCheck className="text-accent mb-5" size={30} />
               <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-4">
-                Dedicated Educational Content
+                Owner-Led Authority
               </p>
               <h3 className="text-4xl md:text-5xl font-serif italic leading-tight mb-6">
-                Answer the questions that happen before the lead.
+                Position Umbrella&apos;s owners as trusted voices in the industry.
               </h3>
               <p className="text-lg text-text-dark/70 leading-relaxed mb-8">
-                These articles can rank for long-tail searches and give ads or service pages
-                stronger supporting material when homeowners are still comparing options.
+                Beyond ranking pages, the brand should make the people behind Umbrella visible:
+                credible, helpful, and confident enough to teach homeowners what matters before
+                they choose a contractor.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {blogTopics.map((topic) => (
-                  <div key={topic} className="rounded-xl bg-primary border border-text-dark/10 p-4">
-                    <p className="font-semibold text-text-dark/76">{topic}</p>
+                {ownerLeadershipItems.map((item) => (
+                  <div key={item} className="rounded-xl bg-primary border border-text-dark/10 p-4">
+                    <p className="font-semibold leading-relaxed text-text-dark/72">{item}</p>
                   </div>
                 ))}
+              </div>
+            </article>
+
+            <article className="proposal-animate-card rounded-[1.25rem] bg-[#111111] text-[#E8E4DD] p-7 md:p-9 overflow-hidden relative transition-transform duration-300 hover:-translate-y-1">
+              <div className="absolute inset-y-0 right-0 w-1/2 opacity-20 bg-[linear-gradient(rgba(245,243,238,0.16)_1px,transparent_1px),linear-gradient(90deg,rgba(245,243,238,0.16)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+              <div className="relative">
+                <Camera className="text-accent mb-5" size={30} />
+                <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent mb-4">
+                  Photography Support
+                </p>
+                <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">
+                  Build a stronger library for the website and socials.
+                </h3>
+                <p className="text-lg text-[#E8E4DD]/70 leading-relaxed mb-7">
+                  A focused photo session would give Umbrella more real visual proof for service
+                  pages, social posts, ads, project recaps, and owner-led content.
+                </p>
+                <div className="space-y-3">
+                  {photographyNeeds.map((item) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <Check className="mt-0.5 shrink-0 text-accent" size={16} />
+                      <p className="font-semibold text-[#E8E4DD]/72">{item}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </article>
           </div>

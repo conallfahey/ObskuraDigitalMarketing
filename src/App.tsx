@@ -435,7 +435,7 @@ export default function App() {
 
             <div className="group relative bg-[#111111] text-[#E8E4DD] p-8 rounded-2xl border border-[#E8E4DD]/10 shadow-sm transition-all overflow-hidden h-[400px] flex flex-col hover:-translate-y-1">
               <div className="flex justify-between items-start mb-auto">
-                <h3 className="text-2xl font-bold font-sans">AI Automation</h3>
+                <h3 className="text-2xl font-bold font-sans">Automation and CRM</h3>
                 <span className="font-mono text-xs px-3 py-1 bg-[#1A1A1A] text-accent rounded-full border border-accent/30">
                   Active
                 </span>
@@ -476,7 +476,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="w-full aspect-[4/3] rounded-3xl overflow-hidden relative shadow-2xl group">
               <img
                 src="images/ComfortMovingChicago.webp"
@@ -551,14 +551,24 @@ export default function App() {
                 </ul>
               </div>
 
-              <Link
-                to="/case-studies/comfort-moving-chicago"
-                className="magnetic-btn bg-text-dark text-background px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-fit"
-              >
-                <span className="relative z-10">See the full case study</span>
-                <span className="relative z-10 group-hover:translate-x-1 transition-transform">&rarr;</span>
-                <span className="hover-bg bg-accent"></span>
-              </Link>
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link
+                  to="/case-studies/comfort-moving-chicago"
+                  className="magnetic-btn bg-text-dark text-background px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-fit"
+                >
+                  <span className="relative z-10">See the full case study</span>
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span className="hover-bg bg-accent"></span>
+                </Link>
+                <Link
+                  to="/case-studies/comfort-moving-crm"
+                  className="magnetic-btn bg-background text-text-dark border border-text-dark/10 px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-fit"
+                >
+                  <span className="relative z-10">View the CRM app</span>
+                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  <span className="hover-bg bg-primary"></span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>

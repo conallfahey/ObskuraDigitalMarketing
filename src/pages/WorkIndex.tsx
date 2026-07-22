@@ -29,6 +29,7 @@ const featuredWork = [
     type: 'App',
     scope: 'CRM / Pipeline / Automation',
     image: '/images/Gallery/Comfort Moving CRM.png',
+    caseStudyUrl: '/case-studies/comfort-moving-crm',
     summary:
       'A custom operating view that keeps inbound leads, follow-up, quote status, and campaign attribution in one place.',
   },
@@ -98,6 +99,7 @@ type ViewerItem = {
   category?: string;
   type?: string;
   image: string;
+  caseStudyUrl?: string;
   viewer?: 'image' | 'instagram';
 };
 
@@ -309,15 +311,17 @@ export default function WorkIndex() {
 
           <div className="work-feature-grid grid grid-cols-1 lg:grid-cols-3 gap-7">
             {featuredWork.map((item, index) => (
-              <button
+              <article
                 key={item.title}
-                type="button"
-                onClick={() => openViewer(item)}
                 className={`work-feature-card group overflow-hidden rounded-[2rem] border border-text-dark/10 shadow-sm bg-background ${
                   index === 1 ? 'lg:translate-y-10' : ''
-                } text-left cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-primary`}
+                }`}
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-text-dark">
+                <button
+                  type="button"
+                  onClick={() => openViewer(item)}
+                  className="relative block aspect-[4/5] w-full overflow-hidden bg-text-dark text-left cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-primary"
+                >
                   <img
                     src={item.image}
                     alt={item.title}
@@ -340,11 +344,20 @@ export default function WorkIndex() {
                       {item.title}
                     </h3>
                   </div>
-                </div>
+                </button>
                 <div className="p-6">
                   <p className="text-text-dark/72 leading-relaxed font-medium">{item.summary}</p>
+                  {item.caseStudyUrl && (
+                    <Link
+                      to={item.caseStudyUrl}
+                      onClick={(event) => event.stopPropagation()}
+                      className="mt-5 inline-flex items-center gap-2 rounded-full bg-text-dark px-4 py-2 text-sm font-bold text-background transition-colors hover:bg-accent"
+                    >
+                      Read case study <ArrowRight size={14} />
+                    </Link>
+                  )}
                 </div>
-              </button>
+              </article>
             ))}
           </div>
         </div>
