@@ -546,7 +546,7 @@ export default function App() {
                   </li>
                   <li className="flex justify-between items-center">
                     <span className="text-text-dark/60">Timeline</span>
-                    <span className="font-bold">First returns in 2 months</span>
+                    <span className="font-bold">Ongoing</span>
                   </li>
                 </ul>
               </div>
