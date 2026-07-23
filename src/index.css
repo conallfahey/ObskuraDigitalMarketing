@@ -404,10 +404,10 @@
 
 @keyframes integrationPulse {
   0%, 100% {
-    opacity: 0.18;
+    opacity: 0.34;
   }
   50% {
-    opacity: 0.82;
+    opacity: 0.9;
   }
 }
 
@@ -457,6 +457,7 @@
 .integration-node {
   position: absolute;
   z-index: 2;
+  transform: translate(-50%, -50%);
   border-radius: 9999px;
   border: 1px solid rgba(232, 228, 221, 0.14);
   background: rgba(232, 228, 221, 0.92);
@@ -469,34 +470,65 @@
   box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18);
 }
 
-.integration-path {
+.integration-map-lines {
   position: absolute;
-  left: 24%;
-  top: 50%;
-  width: 54%;
-  height: 2px;
-  border-radius: 9999px;
-  background: var(--color-accent);
-  transform-origin: left center;
+  inset: 0;
+  z-index: 1;
+  overflow: visible;
+}
+
+.integration-connector {
+  stroke: var(--color-accent);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.48;
   animation: integrationPulse 2.8s ease-in-out infinite;
 }
 
-.integration-path-a {
-  transform: rotate(18deg);
+.integration-connector:nth-child(2) {
+  animation-delay: 0.35s;
 }
 
-.integration-path-b {
-  top: 62%;
-  transform: rotate(-16deg);
+.integration-connector:nth-child(3) {
   animation-delay: 0.5s;
 }
 
-.integration-path-c {
-  left: 34%;
-  top: 38%;
-  width: 42%;
-  transform: rotate(78deg);
-  animation-delay: 1s;
+.integration-connector:nth-child(4) {
+  animation-delay: 0.85s;
+}
+
+.integration-node-website {
+  left: 18%;
+  top: 22%;
+}
+
+.integration-node-meta {
+  left: 82%;
+  top: 22%;
+}
+
+.integration-node-crm {
+  left: 50%;
+  top: 50%;
+}
+
+.integration-node-calendar {
+  left: 18%;
+  top: 78%;
+}
+
+.integration-node-stripe {
+  left: 82%;
+  top: 78%;
+}
+
+@media (max-width: 767px) {
+  .integration-node {
+    padding: 0.48rem 0.62rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

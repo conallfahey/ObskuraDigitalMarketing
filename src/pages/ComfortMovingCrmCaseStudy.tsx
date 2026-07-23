@@ -33,6 +33,7 @@ const problemQuestions = [
   'Has the deposit or final payment been handled?',
   'Where did the lead come from?',
   'Who on the team touched the record last?',
+  'What is the next action for this customer?',
 ];
 
 const stages = ['New Inquiry', 'Quoted', 'Booked', 'Completed'];
@@ -120,59 +121,14 @@ const integrations = [
 ];
 
 const visualIdeas = [
-  'Sticky pipeline rail that tracks the lead journey as the reader scrolls',
-  'Screenshot frames that animate from wireframe placeholders into full UI captures',
-  'Status badges that gently transition between CRM states',
-  'Timeline entries that appear as the activity log section enters view',
-  'Route lines that draw between pickup and drop-off cards',
-  'Calendar blocks that slide into the Upcoming Moves section',
-  'Contract and payment cards that complete with a satisfying check-state animation',
-];
-
-const screenshotSet = [
-  {
-    file: 'dashboard.png',
-    caption:
-      'Dashboard with recent leads, upcoming moves, potential revenue, lead trends, referral breakdown, and status charts.',
-  },
-  {
-    file: 'lead-inbox.png',
-    caption:
-      'Active pipeline table with statuses, contract badges, contact links, referral source, and move dates.',
-  },
-  {
-    file: 'manual-lead-entry.png',
-    caption: 'Staff-created lead flow for phone calls, referrals, and walk-ins.',
-  },
-  {
-    file: 'lead-detail.png',
-    caption: 'Full sales and operations workspace for one customer.',
-  },
-  {
-    file: 'contract-flow.png',
-    caption: 'Contract generation, sent/signed status, PDF access, and customer signing view.',
-  },
-  {
-    file: 'payment-flow.png',
-    caption:
-      'Final payment request with time, fees, deposit credit, tip, card checkout, and Zelle instructions.',
-  },
-  {
-    file: 'upcoming-moves.png',
-    caption: 'Booked moves view with route and calendar sync status.',
-  },
-  {
-    file: 'tasks.png',
-    caption: 'Follow-up task board with due dates and team categories.',
-  },
-  {
-    file: 'activity-log.png',
-    caption: 'Searchable timeline of notes, bookings, payments, contracts, and status changes.',
-  },
-  {
-    file: 'settings.png',
-    caption: 'Role management, notifications, calendar connection, and system utilities.',
-  },
+  'What does each lead need next?',
+  'Which records are ready to book?',
+  'Where are the pickup and drop-off details?',
+  'Which contracts still need signatures?',
+  'Which payment requests are outstanding?',
+  'What moves are on the calendar?',
+  'Which follow-ups are overdue?',
+  'Compact controls that keep repeated staff workflows fast and predictable',
 ];
 
 const timelineItems = [
@@ -185,7 +141,7 @@ const timelineItems = [
   'Review reminder queued',
 ];
 
-function ScreenshotPlaceholder({
+function ProductVisual({
   title,
   caption,
   variant = 'dashboard',
@@ -195,12 +151,12 @@ function ScreenshotPlaceholder({
   variant?: 'dashboard' | 'inbox' | 'lead' | 'form' | 'contract' | 'moves' | 'activity' | 'map';
 }) {
   return (
-    <figure className="screenshot-frame overflow-hidden rounded-[1.75rem] border border-text-dark/10 bg-background shadow-sm">
+    <figure className="product-frame overflow-hidden rounded-[1.75rem] border border-text-dark/10 bg-background shadow-sm">
       <div className="border-b border-text-dark/10 bg-primary px-5 py-4">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-dark/45">
-              Screenshot Placeholder
+              Product View
             </p>
             <h3 className="mt-1 text-xl font-bold">{title}</h3>
           </div>
@@ -308,14 +264,22 @@ function ScreenshotPlaceholder({
             )}
             {variant === 'map' && (
               <div className="relative h-full min-h-[190px]">
-                <div className="integration-node left-[8%] top-[18%]">Website</div>
-                <div className="integration-node right-[10%] top-[12%]">Meta</div>
-                <div className="integration-node left-[38%] top-[44%] bg-accent text-white">CRM</div>
-                <div className="integration-node bottom-[12%] left-[10%]">Calendar</div>
-                <div className="integration-node bottom-[14%] right-[8%]">Stripe</div>
-                <span className="integration-path integration-path-a"></span>
-                <span className="integration-path integration-path-b"></span>
-                <span className="integration-path integration-path-c"></span>
+                <svg
+                  className="integration-map-lines"
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <line className="integration-connector" x1="50" y1="50" x2="18" y2="22" />
+                  <line className="integration-connector" x1="50" y1="50" x2="82" y2="22" />
+                  <line className="integration-connector" x1="50" y1="50" x2="18" y2="78" />
+                  <line className="integration-connector" x1="50" y1="50" x2="82" y2="78" />
+                </svg>
+                <div className="integration-node integration-node-website">Website</div>
+                <div className="integration-node integration-node-meta">Meta</div>
+                <div className="integration-node integration-node-crm bg-accent text-white">CRM</div>
+                <div className="integration-node integration-node-calendar">Calendar</div>
+                <div className="integration-node integration-node-stripe">Stripe</div>
               </div>
             )}
             {variant === 'dashboard' && (
@@ -346,6 +310,121 @@ function ScreenshotPlaceholder({
         {caption}
       </figcaption>
     </figure>
+  );
+}
+
+function SearchQueryPanel({
+  items,
+  eyebrow = 'Workflow Search',
+  theme = 'light',
+}: {
+  items: string[];
+  eyebrow?: string;
+  theme?: 'light' | 'dark';
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [typedLength, setTypedLength] = useState(0);
+
+  const activeItem = items[activeIndex] ?? '';
+  const visibleItem = activeItem.slice(0, typedLength);
+  const isDark = theme === 'dark';
+
+  useEffect(() => {
+    setTypedLength(0);
+
+    const typingInterval = window.setInterval(() => {
+      setTypedLength((currentLength) => {
+        if (currentLength >= activeItem.length) {
+          window.clearInterval(typingInterval);
+          return currentLength;
+        }
+
+        return currentLength + 1;
+      });
+    }, 26);
+
+    const rotationTimeout = window.setTimeout(() => {
+      setActiveIndex((currentIndex) => (currentIndex + 1) % items.length);
+    }, Math.max(2600, activeItem.length * 38 + 900));
+
+    return () => {
+      window.clearInterval(typingInterval);
+      window.clearTimeout(rotationTimeout);
+    };
+  }, [activeItem, items.length]);
+
+  return (
+    <div
+      className={`crm-reveal rounded-[2rem] border p-5 shadow-sm md:p-6 ${
+        isDark ? 'border-[#E8E4DD]/10 bg-[#1A1A1A]' : 'border-text-dark/10 bg-background'
+      }`}
+    >
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <p
+          className={`font-mono text-xs uppercase tracking-[0.22em] ${
+            isDark ? 'text-[#E8E4DD]/45' : 'text-text-dark/45'
+          }`}
+        >
+          {eyebrow}
+        </p>
+        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+          {String(activeIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+        </p>
+      </div>
+
+      <div
+        className={`rounded-2xl border p-4 ${
+          isDark ? 'border-[#E8E4DD]/10 bg-[#111111]' : 'border-text-dark/10 bg-primary'
+        }`}
+      >
+        <div
+          className={`flex items-center gap-3 rounded-xl border px-4 py-4 ${
+            isDark ? 'border-[#E8E4DD]/10 bg-[#1A1A1A]' : 'border-text-dark/10 bg-background'
+          }`}
+        >
+          <Search className="shrink-0 text-accent" size={18} />
+          <p
+            className={`min-h-[1.75rem] flex-1 text-base font-semibold md:text-lg ${
+              isDark ? 'text-[#E8E4DD]/82' : 'text-text-dark/78'
+            }`}
+          >
+            {visibleItem}
+            <span className="ml-0.5 inline-block h-5 w-px translate-y-1 bg-accent"></span>
+          </p>
+        </div>
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        {items.map((item, index) => (
+          <button
+            key={item}
+            type="button"
+            onClick={() => setActiveIndex(index)}
+            className={`group flex min-h-14 items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-300 ${
+              activeIndex === index
+                ? isDark
+                  ? 'border-accent bg-[#E8E4DD] text-text-dark shadow-md'
+                  : 'border-accent bg-text-dark text-background shadow-md'
+                : isDark
+                  ? 'border-[#E8E4DD]/10 bg-[#111111] text-[#E8E4DD] hover:border-accent/40'
+                  : 'border-text-dark/10 bg-primary text-text-dark hover:border-accent/40'
+            }`}
+          >
+            <Search
+              className={`shrink-0 transition-colors ${
+                activeIndex === index
+                  ? 'text-accent'
+                  : isDark
+                    ? 'text-[#E8E4DD]/38 group-hover:text-accent'
+                    : 'text-text-dark/38 group-hover:text-accent'
+              }`}
+              size={16}
+            />
+            <span className="text-sm font-bold leading-snug">{item}</span>
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -390,16 +469,18 @@ export default function ComfortMovingCrmCaseStudy() {
         ease: 'power2.out',
       });
 
-      gsap.from('.screenshot-frame', {
-        scrollTrigger: {
-          trigger: '.screenshot-gallery',
-          start: 'top 78%',
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: 'power2.out',
+      gsap.utils.toArray<HTMLElement>('.product-frame').forEach((frame) => {
+        gsap.from(frame, {
+          scrollTrigger: {
+            trigger: frame,
+            start: 'top 86%',
+            once: true,
+          },
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+        });
       });
     }, containerRef);
 
@@ -471,16 +552,9 @@ export default function ComfortMovingCrmCaseStudy() {
                 Comfort Moving CRM
               </h1>
               <p className="max-w-3xl text-xl font-medium leading-relaxed text-text-dark/80 md:text-2xl">
-                Comfort Moving needed a CRM that matched the speed and messiness of a real moving
-                business: quote requests arriving from the website, phone calls, Meta leads,
-                follow-ups, contracts, deposits, final payments, calendar handoffs, and review
-                reminders. Generic CRMs were too broad, too expensive, or too disconnected from how
-                the team actually books and completes moves.
-              </p>
-              <p className="mt-5 max-w-3xl text-lg font-medium leading-relaxed text-text-dark/70">
-                I built a custom CRM that turns those scattered touchpoints into one focused
-                operating system for the business. The app gives the team a clean command center for
-                managing every lead from first inquiry to completed move.
+                A custom operating system for Comfort Moving that brings quote requests, phone
+                leads, Meta inquiries, contracts, payments, calendar handoffs, and review follow-ups
+                into one focused command center.
               </p>
             </div>
 
@@ -510,8 +584,8 @@ export default function ComfortMovingCrmCaseStudy() {
                 ))}
               </div>
               <p className="mt-6 text-sm font-medium leading-relaxed text-text-dark/62">
-                A lead card flows from "New Inquiry" to "Quoted" to "Booked" to "Completed," with
-                each stage lighting up as the surrounding dashboard metrics update.
+                The pipeline moves from new inquiry to completed move with clear status changes,
+                visible next steps, and live operational context.
               </p>
             </div>
           </div>
@@ -534,19 +608,7 @@ export default function ComfortMovingCrmCaseStudy() {
             </p>
           </div>
 
-          <div className="crm-reveal grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {problemQuestions.map((question, index) => (
-              <div
-                key={question}
-                className={`rounded-2xl border border-text-dark/10 p-5 ${
-                  index === 0 ? 'bg-text-dark text-background sm:col-span-2' : 'bg-background'
-                }`}
-              >
-                <Search className={index === 0 ? 'mb-5 text-accent' : 'mb-5 text-text-dark/42'} size={21} />
-                <p className="font-bold leading-snug">{question}</p>
-              </div>
-            ))}
-          </div>
+          <SearchQueryPanel items={problemQuestions} />
         </div>
       </section>
 
@@ -573,7 +635,7 @@ export default function ComfortMovingCrmCaseStudy() {
             </p>
           </div>
 
-          <ScreenshotPlaceholder
+          <ProductVisual
             title="Dashboard"
             caption="CRM dashboard with revenue cards, lead trends, upcoming moves, and status charts."
           />
@@ -610,15 +672,11 @@ export default function ComfortMovingCrmCaseStudy() {
             </div>
 
             <div className="grid grid-cols-1 gap-5">
-              <ScreenshotPlaceholder
+              <ProductVisual
                 title="Lead Inbox"
                 caption="Lead inbox table with statuses, contact links, contract badges, referral sources, and move dates."
                 variant="inbox"
               />
-              <p className="rounded-2xl border border-text-dark/10 bg-background p-5 text-sm font-medium leading-relaxed text-text-dark/66">
-                Inbox rows subtly sort into status lanes while badges pulse for high-priority states
-                like "New," "Follow Up Needed," and "Contract Sent."
-              </p>
             </div>
           </div>
         </div>
@@ -634,13 +692,6 @@ export default function ComfortMovingCrmCaseStudy() {
               <h2 className="max-w-4xl text-4xl font-bold tracking-tight md:text-5xl">
                 The operational pieces a moving company actually needs.
               </h2>
-            </div>
-            <div className="max-w-sm rounded-2xl bg-text-dark p-5 text-background">
-              <p className="text-sm font-medium leading-relaxed text-background/72">
-                The lead detail page opens with a split motion: customer context slides in from the
-                left, operational details settle on the right, and the activity timeline builds
-                upward like a living record.
-              </p>
             </div>
           </div>
 
@@ -661,65 +712,6 @@ export default function ComfortMovingCrmCaseStudy() {
                 </article>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section className="screenshot-gallery bg-primary px-6 py-24 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-            <div>
-              <p className="mb-4 font-mono text-sm uppercase tracking-[0.24em] text-accent">
-                Product Screens
-              </p>
-              <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-                Placeholder slots for the real app captures.
-              </h2>
-            </div>
-            <p className="text-lg font-medium leading-relaxed text-text-dark/72">
-              These are intentionally framed as screenshot placeholders so the marketing page can
-              launch now, then swap in authenticated app screenshots when ready.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <ScreenshotPlaceholder
-              title="Public Quote Form"
-              caption="Public quote form with move details, contact fields, referral source, and spam protection."
-              variant="form"
-            />
-            <ScreenshotPlaceholder
-              title="Lead Detail"
-              caption="Full lead detail page showing customer info, route, quote fields, contract actions, payment actions, notes, and activity timeline."
-              variant="lead"
-            />
-            <ScreenshotPlaceholder
-              title="Contracts"
-              caption="Contract status area with signed/pending state, resend controls, PDF link, and customer signing preview."
-              variant="contract"
-            />
-            <ScreenshotPlaceholder
-              title="Upcoming Moves"
-              caption="Upcoming moves list with route details, move dates, and calendar sync indicators."
-              variant="moves"
-            />
-            <ScreenshotPlaceholder
-              title="Activity Log"
-              caption="Activity log with filters, timestamped events, notes, booking updates, and payment/contract activity."
-              variant="activity"
-            />
-            <ScreenshotPlaceholder
-              title="Integration Map"
-              caption="Integration map showing website, Meta, Firebase, Google Calendar, Stripe, contracts, and review reminders feeding the CRM."
-              variant="map"
-            />
-          </div>
-
-          <div className="mt-6 rounded-2xl border border-text-dark/10 bg-background p-5 text-sm font-medium leading-relaxed text-text-dark/66">
-            A contract card flips from "Sent" to "Signed," then drops a stamped PDF icon into the
-            lead activity timeline. Thin animated paths carry small "lead," "contract," "payment,"
-            and "review" tokens between the website, CRM, calendar, Stripe, and customer-facing
-            pages.
           </div>
         </div>
       </section>
@@ -768,17 +760,7 @@ export default function ComfortMovingCrmCaseStudy() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {visualIdeas.map((idea, index) => (
-              <div
-                key={idea}
-                className="rounded-2xl border border-[#E8E4DD]/10 bg-[#1A1A1A] p-5"
-              >
-                <p className="mb-4 font-mono text-xs text-accent">0{index + 1}</p>
-                <p className="font-bold leading-snug">{idea}</p>
-              </div>
-            ))}
-          </div>
+          <SearchQueryPanel items={visualIdeas} eyebrow="Interface Search" theme="dark" />
         </div>
       </section>
 
@@ -828,36 +810,6 @@ export default function ComfortMovingCrmCaseStudy() {
         </div>
       </section>
 
-      <section className="bg-primary px-6 py-24 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-4xl">
-            <p className="mb-4 font-mono text-sm uppercase tracking-[0.24em] text-accent">
-              Suggested Screenshot Set
-            </p>
-            <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-              The capture list for the final polished version.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {screenshotSet.map((item, index) => (
-              <div
-                key={item.file}
-                className="grid grid-cols-[3rem_1fr] gap-4 rounded-2xl border border-text-dark/10 bg-background p-5"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-text-dark font-mono text-sm text-background">
-                  {index + 1}
-                </div>
-                <div>
-                  <p className="mb-1 font-mono text-xs text-accent">{item.file}</p>
-                  <p className="font-medium leading-relaxed text-text-dark/72">{item.caption}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="px-6 py-24 md:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl rounded-[2rem] bg-text-dark p-8 text-background md:p-12">
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.78fr_1.22fr]">
@@ -891,6 +843,59 @@ export default function ComfortMovingCrmCaseStudy() {
                 <span className="hover-bg bg-background"></span>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[0.7fr_1.3fr]">
+            <div>
+              <p className="mb-4 font-mono text-sm uppercase tracking-[0.24em] text-accent">
+                Product Gallery
+              </p>
+              <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
+                The CRM as a connected operating layer.
+              </h2>
+            </div>
+            <p className="text-lg font-medium leading-relaxed text-text-dark/72">
+              The gallery shows how the system organizes intake, sales activity, contracts,
+              payments, booked moves, and follow-up work without pulling the team into disconnected
+              tools.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <ProductVisual
+              title="Public Quote Form"
+              caption="Public quote flow with move details, contact fields, referral source, and spam protection."
+              variant="form"
+            />
+            <ProductVisual
+              title="Lead Detail"
+              caption="Full lead workspace with customer info, route, quote fields, contract actions, payment actions, notes, and activity timeline."
+              variant="lead"
+            />
+            <ProductVisual
+              title="Contracts"
+              caption="Contract status with signed/pending state, resend controls, PDF access, and customer signing flow."
+              variant="contract"
+            />
+            <ProductVisual
+              title="Upcoming Moves"
+              caption="Booked move view with route details, move dates, and calendar sync indicators."
+              variant="moves"
+            />
+            <ProductVisual
+              title="Activity Log"
+              caption="Activity timeline with filters, timestamped events, notes, booking updates, payment activity, and contract activity."
+              variant="activity"
+            />
+            <ProductVisual
+              title="Integration Map"
+              caption="Connected system map linking the website, Meta, Firebase, Google Calendar, Stripe, contracts, and review reminders."
+              variant="map"
+            />
           </div>
         </div>
       </section>

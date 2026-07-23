@@ -667,7 +667,7 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
   };
 
   return (
-    <main className="min-h-screen bg-[#111111] text-[#E8E4DD] px-6 md:px-12 lg:px-24 flex items-center justify-center overflow-hidden relative">
+    <main className="relative flex min-h-[100dvh] items-center justify-center overflow-x-hidden bg-[#111111] px-4 py-8 text-[#E8E4DD] sm:px-6 md:px-12 lg:px-24">
       <div className="absolute inset-0 opacity-35">
         <img
           src={proposalImages.hero}
@@ -677,23 +677,23 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(230,59,46,0.34),transparent_32%),linear-gradient(90deg,#111111_0%,rgba(17,17,17,0.84)_48%,rgba(17,17,17,0.62)_100%)]"></div>
       </div>
 
-      <section className="relative w-full max-w-5xl grid grid-cols-1 lg:grid-cols-[1fr_0.75fr] gap-10 items-center">
+      <section className="relative grid w-full max-w-5xl grid-cols-1 items-center gap-7 sm:gap-9 lg:grid-cols-[1fr_0.75fr] lg:gap-10">
         <div>
-          <Link to="/" className="inline-flex items-center gap-3 mb-12">
+          <Link to="/" className="mb-8 inline-flex items-center gap-3 sm:mb-10 lg:mb-12">
             <img
               src="/images/Obskura - Black Stroke SVG - NO BG.svg"
               alt="Obskura"
-              className="h-9 object-contain invert"
+              className="h-8 object-contain invert sm:h-9"
             />
-            <span className="text-xl font-bold tracking-tight">Obskura</span>
+            <span className="text-lg font-bold tracking-tight sm:text-xl">Obskura</span>
           </Link>
-          <p className="font-mono text-xs tracking-[0.26em] uppercase text-accent mb-5">
+          <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.22em] text-accent sm:text-xs sm:tracking-[0.26em]">
             Private Proposal
           </p>
-          <h1 className="text-5xl md:text-7xl font-serif italic leading-[0.92] mb-6">
+          <h1 className="mb-5 max-w-[11ch] font-serif text-[3rem] italic leading-[0.92] sm:max-w-none sm:text-5xl md:text-7xl">
             Umbrella Construction & Restoration
           </h1>
-          <p className="max-w-2xl text-lg md:text-xl text-[#E8E4DD]/72 leading-relaxed font-medium">
+          <p className="max-w-2xl text-base font-medium leading-relaxed text-[#E8E4DD]/72 sm:text-lg md:text-xl">
             A focused SEO, Meta ads, video creative, and lead-quality tracking plan for local
             roofing and storm restoration growth.
           </p>
@@ -701,19 +701,19 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
 
         <form
           onSubmit={handleSubmit}
-          className="rounded-[2rem] border border-[#E8E4DD]/12 bg-[#111111]/72 p-6 md:p-8 shadow-2xl backdrop-blur-xl"
+          className="w-full rounded-[1.25rem] border border-[#E8E4DD]/12 bg-[#111111]/78 p-5 shadow-2xl backdrop-blur-xl sm:p-6 md:rounded-[1.5rem] md:p-8"
         >
-          <div className="mb-8 flex h-13 w-13 items-center justify-center rounded-full bg-accent text-white">
-            <Lock size={22} />
+          <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-accent text-white sm:mb-8 sm:h-13 sm:w-13">
+            <Lock size={20} />
           </div>
-          <h2 className="text-2xl font-bold mb-3">Unlock the proposal</h2>
-          <p className="text-sm leading-relaxed text-[#E8E4DD]/58 mb-7">
+          <h2 className="mb-3 text-2xl font-bold">Unlock the proposal</h2>
+          <p className="mb-6 text-sm leading-relaxed text-[#E8E4DD]/58 sm:mb-7">
             This page is password protected for client review.
           </p>
-          <label htmlFor="proposal-password" className="font-mono text-xs uppercase tracking-[0.2em] text-[#E8E4DD]/45">
+          <label htmlFor="proposal-password" className="font-mono text-[11px] uppercase tracking-[0.18em] text-[#E8E4DD]/45 sm:text-xs sm:tracking-[0.2em]">
             Password
           </label>
-          <div className="mt-3 flex gap-3">
+          <div className="mt-3 flex gap-2.5 sm:gap-3">
             <input
               id="proposal-password"
               type="password"
@@ -722,12 +722,12 @@ function PasswordGate({ onUnlock }: { onUnlock: () => void }) {
                 setPassword(event.target.value);
                 setError('');
               }}
-              className="min-w-0 flex-1 rounded-full border border-[#E8E4DD]/15 bg-[#E8E4DD] px-5 py-3 text-[#111111] outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40"
+              className="min-w-0 flex-1 rounded-full border border-[#E8E4DD]/15 bg-[#E8E4DD] px-4 py-3 text-[#111111] outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/40 sm:px-5"
               autoComplete="current-password"
             />
             <button
               type="submit"
-              className="magnetic-btn h-12 w-12 shrink-0 rounded-full bg-accent text-white flex items-center justify-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-[#111111]"
+              className="magnetic-btn flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-white group focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-[#111111]"
               aria-label="Unlock proposal"
             >
               <ArrowRight className="relative z-10 group-hover:translate-x-0.5 transition-transform" size={18} />
