@@ -211,7 +211,7 @@ export default function App() {
         </div>
         <button className="magnetic-btn bg-text-dark text-background px-5 py-2 rounded-full text-sm font-medium group">
           <span className="relative z-10 flex items-center gap-2">
-            Contact <span className="text-accent group-hover:text-background transition-colors">↗</span>
+            Contact <span className="text-accent group-hover:text-background transition-colors">{'↗\uFE0E'}</span>
           </span>
           <span className="hover-bg bg-accent"></span>
         </button>
