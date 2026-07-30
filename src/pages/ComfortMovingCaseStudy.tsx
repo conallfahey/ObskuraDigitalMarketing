@@ -17,7 +17,7 @@ const systemCards = [
   {
     title: 'Custom CRM Workflow',
     label: 'CRM',
-    image: '/images/Gallery/Comfort Moving CRM.png',
+    image: '/images/Screenshot 2026-07-29 154518.png',
     description:
       'A moving-company-specific backend organized lead intake, payments, contracts, review follow-ups, and client progress in one place.',
   },
@@ -249,7 +249,7 @@ export default function ComfortMovingCaseStudy() {
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-text-dark/10 bg-primary">
                   <img
-                    src="/images/Gallery/Comfort Moving CRM.png"
+                    src="/images/Screenshot 2026-07-29 154518.png"
                     alt="Comfort Moving CRM dashboard"
                     className="h-32 w-full object-cover object-top"
                   />

@@ -44,12 +44,36 @@ const videoSchedule = [
   { day: 'S', task: 'Analyzing' },
 ];
 
+const caseStudyProofCards = [
+  {
+    metric: '16x',
+    label: 'ROAS',
+    detail: 'Meta ads performance in the first two months.',
+  },
+  {
+    metric: 'CRM',
+    label: 'Built Custom',
+    detail: 'Website, quote, and Meta leads unified into one pipeline.',
+  },
+  {
+    metric: 'SEO',
+    label: 'Local Search',
+    detail: 'Service and neighborhood pages structured for Chicago moving intent.',
+  },
+  {
+    metric: 'One',
+    label: 'Growth System',
+    detail: 'Creative, paid media, SEO, and follow-up connected together.',
+  },
+];
+
 const contactEmail = 'conall@obskuraagency.com';
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(0);
+  const contactRedirectUrl = `${window.location.origin}/thank-you`;
 
   useEffect(() => {
     if (window.location.hash === '#contact') {
@@ -231,7 +255,7 @@ export default function App() {
           <img
             src="images/Obskura-Chicago-Marketing-Content.avif"
             alt="Chicago Digital Marketing Content"
-            className="w-full h-full object-cover grayscale-[30%] contrast-125 opacity-90"
+            className="home-hero-photo w-full h-full object-cover grayscale-[30%] contrast-125 opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent"></div>
         </div>
@@ -485,6 +509,26 @@ export default function App() {
             </p>
           </div>
 
+          <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {caseStudyProofCards.map((card) => (
+              <Link
+                key={card.label}
+                to="/case-studies/comfort-moving-chicago"
+                className="group rounded-2xl border border-text-dark/10 bg-background p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/35"
+              >
+                <p className="mb-5 font-serif text-5xl italic leading-none tracking-tight text-accent">
+                  {card.metric}
+                </p>
+                <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-text-dark/45">
+                  {card.label}
+                </p>
+                <p className="text-sm font-semibold leading-relaxed text-text-dark/72">
+                  {card.detail}
+                </p>
+              </Link>
+            ))}
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div className="w-full aspect-[4/3] rounded-3xl overflow-hidden relative shadow-2xl group">
               <img
@@ -679,6 +723,7 @@ export default function App() {
           >
             <input type="hidden" name="_subject" value="New Obskura website inquiry" />
             <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value={contactRedirectUrl} />
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <label className="block">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">

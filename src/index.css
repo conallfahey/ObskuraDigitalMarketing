@@ -54,6 +54,22 @@
   @apply transition-transform duration-200 hover:-translate-y-[1px];
 }
 
+.home-hero-photo {
+  object-position: 58% center;
+}
+
+@media (min-width: 768px) {
+  .home-hero-photo {
+    object-position: 54% center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-hero-photo {
+    object-position: center center;
+  }
+}
+
 /* Custom Navigation Scrolled State */
 .nav-scrolled {
   @apply bg-background/90 text-text-dark border-text-dark/20 shadow-md;

@@ -28,7 +28,7 @@ const featuredWork = [
     title: 'Comfort Moving CRM',
     type: 'App',
     scope: 'CRM / Pipeline / Automation',
-    image: '/images/Gallery/Comfort Moving CRM.png',
+    image: '/images/Screenshot 2026-07-29 154825.png',
     caseStudyUrl: '/case-studies/comfort-moving-crm',
     summary:
       'A custom operating view that keeps inbound leads, follow-up, quote status, and campaign attribution in one place.',
@@ -90,7 +90,7 @@ const workTiles = [
   {
     title: 'Comfort Moving CRM',
     category: 'App',
-    image: '/images/Gallery/Comfort Moving CRM.png',
+    image: '/images/Screenshot 2026-07-29 154825.png',
   },
 ];
 

@@ -6,6 +6,7 @@ import App from './App.tsx'
 import ComfortMovingCaseStudy from './pages/ComfortMovingCaseStudy.tsx'
 import ComfortMovingCrmCaseStudy from './pages/ComfortMovingCrmCaseStudy.tsx'
 import ProposalPage from './pages/ProposalPage.tsx'
+import ThankYouPage from './pages/ThankYouPage.tsx'
 import WorkIndex from './pages/WorkIndex.tsx'
 
 createRoot(document.getElementById('root')!).render(
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/case-studies/comfort-moving-chicago" element={<ComfortMovingCaseStudy />} />
         <Route path="/case-studies/comfort-moving-crm" element={<ComfortMovingCrmCaseStudy />} />
         <Route path="/proposals/umbrella-restoration" element={<ProposalPage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

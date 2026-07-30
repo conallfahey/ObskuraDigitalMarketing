@@ -577,7 +577,7 @@ export default function ComfortMovingCrmCaseStudy() {
       <section className="relative isolate overflow-hidden border-b border-text-dark/10 px-6 pb-20 pt-40 md:px-12 lg:px-24">
         <div className="absolute inset-0">
           <img
-            src="/images/Gallery/Comfort Moving CRM.png"
+            src="/images/Screenshot 2026-07-29 154518.png"
             alt="Comfort Moving CRM interface"
             className="h-full w-full object-cover object-top opacity-22 grayscale"
           />
