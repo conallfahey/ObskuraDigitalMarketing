@@ -412,11 +412,13 @@
 }
 
 .video-day-chip {
-  animation: videoDayFocus 8.4s ease-in-out infinite;
+  animation: videoDayFocus 8.4s ease-in-out infinite both;
 }
 
 .video-task-popup {
-  animation: videoTaskReveal 8.4s ease-in-out infinite;
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  animation: videoTaskReveal 8.4s ease-in-out infinite both;
 }
 
 .crm-grid-bg {

@@ -141,6 +141,45 @@ const timelineItems = [
   'Review reminder queued',
 ];
 
+const crmScreenshots = [
+  {
+    title: 'Lead Inbox',
+    src: '/images/Screenshot 2026-07-29 154518.png',
+    alt: 'Comfort Moving CRM lead inbox screenshot',
+    featured: true,
+  },
+  {
+    title: 'Lead Detail',
+    src: '/images/Screenshot 2026-07-29 154541.png',
+    alt: 'Comfort Moving CRM lead detail screenshot',
+  },
+  {
+    title: 'Quote Workflow',
+    src: '/images/Screenshot 2026-07-29 154603.png',
+    alt: 'Comfort Moving CRM quote workflow screenshot',
+  },
+  {
+    title: 'Contract Status',
+    src: '/images/Screenshot 2026-07-29 154617.png',
+    alt: 'Comfort Moving CRM contract status screenshot',
+  },
+  {
+    title: 'Mobile View',
+    src: '/images/Screenshot 2026-07-29 154703.png',
+    alt: 'Comfort Moving CRM mobile screenshot',
+  },
+  {
+    title: 'Upcoming Moves',
+    src: '/images/Screenshot 2026-07-29 154716.png',
+    alt: 'Comfort Moving CRM upcoming moves screenshot',
+  },
+  {
+    title: 'Payments',
+    src: '/images/Screenshot 2026-07-29 154825.png',
+    alt: 'Comfort Moving CRM payments screenshot',
+  },
+];
+
 function ProductVisual({
   title,
   caption,
@@ -524,12 +563,15 @@ export default function ComfortMovingCrmCaseStudy() {
             Case Studies
           </Link>
         </div>
-        <button className="magnetic-btn group rounded-full bg-accent px-5 py-2 text-sm font-medium text-white">
+        <Link
+          to="/#contact"
+          className="magnetic-btn group rounded-full bg-accent px-5 py-2 text-sm font-medium text-white"
+        >
           <span className="relative z-10 flex items-center gap-2">
             Contact <ArrowRight size={14} />
           </span>
           <span className="hover-bg bg-text-dark"></span>
-        </button>
+        </Link>
       </nav>
 
       <section className="relative isolate overflow-hidden border-b border-text-dark/10 px-6 pb-20 pt-40 md:px-12 lg:px-24">
@@ -852,50 +894,44 @@ export default function ComfortMovingCrmCaseStudy() {
           <div className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-[0.7fr_1.3fr]">
             <div>
               <p className="mb-4 font-mono text-sm uppercase tracking-[0.24em] text-accent">
-                Product Gallery
+                CRM Screenshots
               </p>
               <h2 className="text-4xl font-bold tracking-tight md:text-5xl">
-                The CRM as a connected operating layer.
+                The actual working interface Comfort Moving uses.
               </h2>
             </div>
             <p className="text-lg font-medium leading-relaxed text-text-dark/72">
-              The gallery shows how the system organizes intake, sales activity, contracts,
-              payments, booked moves, and follow-up work without pulling the team into disconnected
-              tools.
+              These screens show the live product surface for intake, lead management, quoting,
+              contracts, payments, booked moves, and day-to-day operational follow-up.
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <ProductVisual
-              title="Public Quote Form"
-              caption="Public quote flow with move details, contact fields, referral source, and spam protection."
-              variant="form"
-            />
-            <ProductVisual
-              title="Lead Detail"
-              caption="Full lead workspace with customer info, route, quote fields, contract actions, payment actions, notes, and activity timeline."
-              variant="lead"
-            />
-            <ProductVisual
-              title="Contracts"
-              caption="Contract status with signed/pending state, resend controls, PDF access, and customer signing flow."
-              variant="contract"
-            />
-            <ProductVisual
-              title="Upcoming Moves"
-              caption="Booked move view with route details, move dates, and calendar sync indicators."
-              variant="moves"
-            />
-            <ProductVisual
-              title="Activity Log"
-              caption="Activity timeline with filters, timestamped events, notes, booking updates, payment activity, and contract activity."
-              variant="activity"
-            />
-            <ProductVisual
-              title="Integration Map"
-              caption="Connected system map linking the website, Meta, Firebase, Google Calendar, Stripe, contracts, and review reminders."
-              variant="map"
-            />
+            {crmScreenshots.map((screenshot) => (
+              <figure
+                key={screenshot.src}
+                className={`product-frame overflow-hidden rounded-[1.75rem] border border-text-dark/10 bg-background shadow-sm ${
+                  screenshot.featured ? 'lg:col-span-2' : ''
+                }`}
+              >
+                <div className="border-b border-text-dark/10 bg-background px-5 py-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-text-dark/45">
+                    Product Screenshot
+                  </p>
+                  <h3 className="mt-1 text-xl font-bold">{screenshot.title}</h3>
+                </div>
+                <div className="bg-[#111111] p-2">
+                  <img
+                    src={screenshot.src}
+                    alt={screenshot.alt}
+                    loading="lazy"
+                    className={`w-full rounded-[1.25rem] object-cover object-top ${
+                      screenshot.featured ? 'max-h-[760px]' : 'aspect-[16/10]'
+                    }`}
+                  />
+                </div>
+              </figure>
+            ))}
           </div>
         </div>
       </section>

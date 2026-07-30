@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { Mail, Send } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -43,12 +44,20 @@ const videoSchedule = [
   { day: 'S', task: 'Analyzing' },
 ];
 
+const contactEmail = 'conall@obskuraagency.com';
+
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(0);
 
   useEffect(() => {
+    if (window.location.hash === '#contact') {
+      window.setTimeout(() => {
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+    }
+
     const ctx = gsap.context(() => {
       gsap.from('.hero-content > *', {
         y: 60,
@@ -209,12 +218,12 @@ export default function App() {
             Process
           </a>
         </div>
-        <button className="magnetic-btn bg-text-dark text-background px-5 py-2 rounded-full text-sm font-medium group">
+        <a href="#contact" className="magnetic-btn bg-text-dark text-background px-5 py-2 rounded-full text-sm font-medium group">
           <span className="relative z-10 flex items-center gap-2">
             Contact <span className="text-accent group-hover:text-background transition-colors">{'↗\uFE0E'}</span>
           </span>
           <span className="hover-bg bg-accent"></span>
-        </button>
+        </a>
       </nav>
 
       <section className="relative min-h-[100dvh] w-full overflow-hidden flex items-center px-6 md:px-12 lg:px-24">
@@ -243,14 +252,14 @@ export default function App() {
               </span>
             </h1>
             <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-10 leading-relaxed text-balance">
-              Obskura is a Chicago digital marketing agency that turns attention into measurable growth. We engineer visibility through technical precision.
+              Obskura is a Chicago digital marketing agency that turns attention into measurable growth.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <button className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
+              <a href="#contact" className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
                 <span className="relative z-10">Book a strategy call</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
                 <span className="hover-bg bg-text-dark"></span>
-              </button>
+              </a>
               <div className="flex items-center gap-3 px-6 py-4 rounded-full border border-text-dark/20 backdrop-blur-sm bg-background/50">
                 <div className="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                 <span className="font-mono text-sm tracking-tight text-text-dark/70 uppercase">
@@ -641,6 +650,113 @@ export default function App() {
         </div>
       </section>
 
+      <section id="contact" className="bg-background px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p className="mb-4 font-mono text-sm uppercase tracking-[0.24em] text-accent">
+              Contact
+            </p>
+            <h2 className="mb-6 text-4xl font-bold tracking-tight md:text-5xl">
+              Tell us what you are trying to build.
+            </h2>
+            <p className="text-lg font-medium leading-relaxed text-text-dark/72">
+              Send over the shape of the project, the timeline, and where things feel stuck. We
+              will reply with a clear next step.
+            </p>
+            <a
+              href={`mailto:${contactEmail}`}
+              className="mt-8 inline-flex items-center gap-3 rounded-full border border-text-dark/10 bg-primary px-5 py-3 font-bold text-text-dark transition-colors hover:border-accent hover:text-accent"
+            >
+              <Mail size={18} />
+              {contactEmail}
+            </a>
+          </div>
+
+          <form
+            action={`https://formsubmit.co/${contactEmail}`}
+            method="post"
+            className="rounded-[2rem] border border-text-dark/10 bg-primary p-5 shadow-sm md:p-8"
+          >
+            <input type="hidden" name="_subject" value="New Obskura website inquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <label className="block">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
+                  Name
+                </span>
+                <input
+                  name="name"
+                  required
+                  className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
+                  placeholder="Your name"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
+                  Email
+                </span>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
+                  placeholder="you@example.com"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
+                  Company
+                </span>
+                <input
+                  name="company"
+                  className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
+                  placeholder="Business name"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
+                  Project Type
+                </span>
+                <select
+                  name="project_type"
+                  className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    Select one
+                  </option>
+                  <option>Website</option>
+                  <option>SEO</option>
+                  <option>Video or content</option>
+                  <option>CRM or automation</option>
+                  <option>Not sure yet</option>
+                </select>
+              </label>
+              <label className="block md:col-span-2">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
+                  Message
+                </span>
+                <textarea
+                  name="message"
+                  required
+                  rows={6}
+                  className="w-full resize-none rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
+                  placeholder="What are you trying to make happen?"
+                ></textarea>
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="magnetic-btn group mt-6 inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-8 py-4 font-bold text-white sm:w-auto"
+            >
+              <span className="relative z-10">Send inquiry</span>
+              <Send className="relative z-10 transition-transform group-hover:translate-x-1" size={18} />
+              <span className="hover-bg bg-text-dark"></span>
+            </button>
+          </form>
+        </div>
+      </section>
+
       <footer className="bg-[#111111] text-[#E8E4DD] rounded-t-[4rem] pt-24 pb-8 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-16 mb-24">
           <div className="max-w-sm">
@@ -674,7 +790,7 @@ export default function App() {
                 <a href="#process" className="hover:text-accent transition-colors">
                   Process
                 </a>
-                <a href="#" className="hover:text-accent transition-colors">
+                <a href="#contact" className="hover:text-accent transition-colors">
                   Contact
                 </a>
               </div>

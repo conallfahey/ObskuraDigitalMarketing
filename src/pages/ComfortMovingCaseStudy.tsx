@@ -10,7 +10,7 @@ const systemCards = [
   {
     title: 'SEO Foundation',
     label: 'SEO',
-    image: '/images/Gallery/Comfort Moving - Hero Web Design.png',
+    image: '/images/ComfortMovingWebsite.png',
     description:
       'Service pages, neighborhood landing pages, and local search signals were structured around how Chicago moving customers actually search.',
   },
@@ -178,12 +178,15 @@ export default function ComfortMovingCaseStudy() {
             Process
           </Link>
         </div>
-        <button className="magnetic-btn bg-accent text-white px-5 py-2 rounded-full text-sm font-medium group">
+        <Link
+          to="/#contact"
+          className="magnetic-btn bg-accent text-white px-5 py-2 rounded-full text-sm font-medium group"
+        >
           <span className="relative z-10 flex items-center gap-2">
             Contact <ArrowRight size={14} />
           </span>
           <span className="hover-bg bg-text-dark"></span>
-        </button>
+        </Link>
       </nav>
 
       <section className="relative isolate overflow-hidden pt-40 pb-20 px-6 md:px-12 lg:px-24 border-b border-text-dark/10">
@@ -239,8 +242,8 @@ export default function ComfortMovingCaseStudy() {
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <div className="overflow-hidden rounded-2xl border border-text-dark/10 bg-primary">
                   <img
-                    src="/images/Gallery/Comfort Moving - Hero Web Design.png"
-                    alt="Comfort Moving website hero design"
+                    src="/images/ComfortMovingWebsite.png"
+                    alt="Comfort Moving website screenshot"
                     className="h-32 w-full object-cover object-top"
                   />
                 </div>
@@ -547,11 +550,14 @@ export default function ComfortMovingCaseStudy() {
                 influencer partnerships, custom CRM infrastructure, and SEO worked together to make
                 demand easier to generate, capture, track, and convert.
               </p>
-              <button className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-full sm:w-auto">
+              <Link
+                to="/#contact"
+                className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-full sm:w-auto"
+              >
                 <span className="relative z-10">Book a strategy call</span>
                 <ArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
                 <span className="hover-bg bg-background"></span>
-              </button>
+              </Link>
             </div>
           </div>
       </section>
