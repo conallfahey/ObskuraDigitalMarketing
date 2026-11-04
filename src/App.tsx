@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Mail, Send } from 'lucide-react';
+import FAQ from './components/FAQ';
+import MonthlyPartnerships, { partnershipNames } from './components/MonthlyPartnerships';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,11 +88,29 @@ const investmentPackages = [
   },
 ];
 
+const monthlyPartnership = 'Monthly Partnership';
+const productionVideos = [
+  { title: 'On the Job', file: 'umbrella-roofing-03.mp4', poster: 'umbrella-03-poster-selected.jpg' },
+  { title: 'Client Story', file: 'umbrella-roofing-01.mp4', poster: 'umbrella-01-poster-selected.jpg' },
+];
+
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [selectedInvestment, setSelectedInvestment] = useState('');
+  const [selectedPartnership, setSelectedPartnership] = useState('');
+
+  function selectInvestment(name: string) {
+    setSelectedInvestment(name);
+    setSelectedPartnership('');
+  }
+
+  function selectPartnership(name: string) {
+    setSelectedInvestment(monthlyPartnership);
+    setSelectedPartnership(name);
+  }
+
   const contactRedirectUrl = `${window.location.origin}/thank-you`;
 
   useEffect(() => {
@@ -238,9 +258,9 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto">
-          <div className="hero-content max-w-4xl mx-auto text-center flex flex-col items-center pt-24 md:pt-28">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.6rem] leading-[0.92] tracking-tight mb-6 text-balance">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 pb-12 pt-28 md:pt-32 lg:grid-cols-[1.2fr_1fr]">
+          <div className="hero-content mx-auto flex max-w-4xl flex-col items-center text-center lg:items-start lg:text-left">
+            <h1 className="text-5xl md:text-7xl lg:text-[4.4rem] xl:text-[5rem] leading-[0.92] tracking-tight mb-6 text-balance">
               <span className="block font-bold mb-4">Bridging the gap between</span>
               <span className="hero-word-shell">
                 <span className="hero-word-glow" aria-hidden="true"></span>
@@ -256,7 +276,7 @@ export default function App() {
             <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-10 leading-relaxed text-balance">
               Marketing for home-service businesses. We connect content, ads, websites, and follow-up to help turn local interest into booked jobs.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <a href="#contact" className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
                 <span className="relative z-10">Book a strategy call</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
@@ -270,6 +290,13 @@ export default function App() {
               </div>
             </div>
           </div>
+          <img
+            src="/images/obskura-house.svg"
+            alt="Animated house with the Obskura logo on its facade"
+            width="560"
+            height="500"
+            className="mx-auto w-full max-w-md rounded-3xl shadow-lg lg:max-w-none"
+          />
         </div>
       </section>
 
@@ -307,6 +334,23 @@ export default function App() {
               </ul>
             </div>
           </div>
+          <div className="mt-10 border-t border-text-dark/10 pt-7">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-text-dark/60">
+              Across our social content
+            </p>
+            <dl className="mx-auto mt-4 grid max-w-4xl grid-cols-3 gap-2 text-center sm:gap-6">
+              {[
+                ['Views', '20M+'],
+                ['Likes', '2M+'],
+                ['Shares', '500K+'],
+              ].map(([label, value]) => (
+                <div key={label} className="flex flex-col-reverse gap-1">
+                  <dt className="font-mono text-xs uppercase tracking-wide text-text-dark/65">{label}</dt>
+                  <dd className="text-2xl font-bold tracking-tight text-accent sm:text-4xl">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </section>
 
@@ -323,9 +367,9 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="group relative bg-[#1A1A1A] text-[#F5F3EE] p-8 rounded-2xl border border-[#F5F3EE]/10 shadow-sm transition-all overflow-hidden h-[400px] flex flex-col hover:-translate-y-1">
-              <div className="flex justify-between items-start mb-auto">
-                <h3 className="text-2xl font-bold font-sans">Content & Paid Ads</h3>
-                <div className="flex items-center gap-2">
+              <div className="flex justify-between items-start gap-3 mb-auto">
+                <h3 className="text-2xl font-bold font-sans">Video Production, Short Form Content &amp; Paid Ads</h3>
+                <div className="flex shrink-0 items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                   <span className="font-mono text-xs text-[#F5F3EE]/50 uppercase tracking-widest relative">
                     Live Feed
@@ -604,6 +648,29 @@ export default function App() {
         </div>
       </section>
 
+      <section id="video-production" aria-labelledby="video-production-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <h2 id="video-production-heading" className="mb-8 text-4xl font-bold tracking-tight md:text-5xl">Video Production</h2>
+          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+            {productionVideos.map(video => (
+              <article key={video.file} className="rounded-3xl border border-text-dark/10 bg-primary p-4 sm:p-5">
+                <video
+                  controls
+                  playsInline
+                  preload="none"
+                  aria-label={video.title}
+                  poster={`/images/agency/${video.poster}`}
+                  className="mx-auto aspect-[9/16] w-full max-w-72 rounded-xl bg-black object-contain"
+                >
+                  <source src={`/images/agency/${video.file}`} type="video/mp4" />
+                </video>
+                <h3 className="mt-4 text-center text-xl font-semibold">{video.title}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="process" className="relative bg-background py-24">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-sans font-bold tracking-tight flex items-center justify-center gap-4 mb-4">
@@ -685,13 +752,21 @@ export default function App() {
                   <h3 className="text-2xl font-semibold tracking-tight">{plan.name}</h3>
                 </div>
                 <p className="max-w-lg text-base leading-relaxed text-text-dark/65">{plan.description}</p>
-                <a href="#contact" onClick={() => setSelectedInvestment(plan.name)} aria-label={`Discuss ${plan.name}`} className="inline-flex w-fit items-center gap-4 py-2 text-sm font-semibold transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">Let’s talk <span aria-hidden="true" className="text-accent">↗</span></a>
+                <a href="#contact" onClick={() => selectInvestment(plan.name)} aria-label={`Discuss ${plan.name}`} className="inline-flex w-fit items-center gap-4 py-2 text-sm font-semibold transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">Let’s talk <span aria-hidden="true" className="text-accent">↗</span></a>
               </article>
             ))}
           </div>
           <p className="mt-6 text-xs leading-relaxed text-text-dark/50">Pricing and deliverables are agreed before we start. Advertising spend is separate.</p>
+          <p className="mt-4 text-sm text-text-dark/70">
+            For a monthly retainer with defined deliverables, explore our{' '}
+            <a href="#monthly-partnerships" className="font-semibold underline underline-offset-4 hover:text-accent">Monthly Partnerships</a>.
+          </p>
         </div>
       </section>
+
+      <MonthlyPartnerships onSelect={selectPartnership} />
+
+      <FAQ />
 
       <section id="contact" className="bg-background px-6 py-24 md:px-12 lg:px-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -726,11 +801,30 @@ export default function App() {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <label className="block md:col-span-2">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Investment package</span>
-                <select name="investment_package" value={selectedInvestment} onChange={event => setSelectedInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
+                <select name="investment_package" value={selectedInvestment} onChange={event => selectInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
                   <option value="">Help me choose / custom scope</option>
                   {investmentPackages.map(plan => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
+                  <option className="font-bold text-accent" value={monthlyPartnership}>{monthlyPartnership}</option>
                 </select>
               </label>
+              {selectedInvestment !== monthlyPartnership && (
+                <button
+                  type="button"
+                  onClick={() => selectInvestment(monthlyPartnership)}
+                  className="-mt-2 w-fit text-left text-sm font-bold text-accent underline decoration-2 underline-offset-4 hover:text-text-dark md:col-span-2"
+                >
+                  Choose Monthly Partnership
+                </button>
+              )}
+              {selectedInvestment === monthlyPartnership && (
+                <label className="block md:col-span-2">
+                  <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Monthly partnership</span>
+                  <select name="monthly_partnership" required value={selectedPartnership} onChange={event => setSelectedPartnership(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
+                    <option value="">Select a monthly partnership</option>
+                    {partnershipNames.map(name => <option key={name} value={name}>{name}</option>)}
+                  </select>
+                </label>
+              )}
               <label className="block">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
                   Name
@@ -764,12 +858,13 @@ export default function App() {
                   placeholder="Business name"
                 />
               </label>
-              <label className="block">
+              <label className={selectedInvestment === monthlyPartnership ? 'hidden' : 'block'}>
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
                   Project Type
                 </span>
                 <select
                   name="project_type"
+                  disabled={selectedInvestment === monthlyPartnership}
                   className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
                   defaultValue=""
                 >

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
 const team = [
-  { first: 'Conall', last: 'Fahey', initials: 'CF' },
-  { first: 'Teddy', last: 'Demask', initials: 'TD' },
-  { first: 'Max', last: 'Peckinpaugh', initials: 'MP' },
+  { first: 'Conall', last: 'Fahey', photo: 'conall' },
+  { first: 'Teddy', last: 'Demask', photo: 'teddy' },
+  { first: 'Max', last: 'Peckinpaugh', photo: 'max' },
 ];
 
 export default function TeamPage() {
@@ -33,14 +33,19 @@ export default function TeamPage() {
         </header>
 
         <section aria-label="Team members" className="border-t border-text-dark/25">
-          {team.map((person, index) => (
-            <article key={person.initials} className="group grid grid-cols-[2rem_1fr] items-center gap-4 border-b border-text-dark/20 py-9 sm:grid-cols-[3rem_1fr_auto] sm:gap-6 md:py-12">
-              <span aria-hidden="true" className="self-start pt-2 font-mono text-xs text-accent md:pt-3">0{index + 1}</span>
-              <h2 className="text-3xl font-medium leading-[1.1] tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-6xl">
+          {team.map(person => (
+            <article key={person.photo} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-text-dark/20 py-9 sm:gap-6 md:py-12">
+              <h2 className="text-2xl font-medium leading-[1.1] tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-6xl">
                 {person.first} <span className="font-serif font-normal italic">{person.last}</span>
               </h2>
-              <div aria-hidden="true" className="hidden h-16 w-16 items-center justify-center rounded-full border border-text-dark/20 font-mono text-sm text-text-dark/45 transition-colors group-hover:border-accent group-hover:text-accent sm:flex md:h-20 md:w-20">
-                {person.initials}
+              <div className="size-16 overflow-hidden rounded-full bg-primary ring-1 ring-text-dark/15 sm:size-24 md:size-28">
+                <img
+                  src={`/images/team/${person.photo}.webp`}
+                  alt=""
+                  width="512"
+                  height="512"
+                  className="size-full origin-[50%_36%] scale-150 object-cover"
+                />
               </div>
             </article>
           ))}
