@@ -253,9 +253,16 @@ export default function App() {
                 </span>
               </span>
             </h1>
-            <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-10 leading-relaxed text-balance">
+            <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-4 leading-relaxed text-balance">
               Marketing for home-service businesses. We connect content, ads, websites, and follow-up to help turn local interest into booked jobs.
             </p>
+            <img
+              src="/images/obskura-hero-mark.svg"
+              alt=""
+              width="64"
+              height="64"
+              className="mb-5 size-14 opacity-90 md:size-16"
+            />
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a href="#contact" className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
                 <span className="relative z-10">Book a strategy call</span>
@@ -306,6 +313,23 @@ export default function App() {
                 ))}
               </ul>
             </div>
+          </div>
+          <div className="mt-10 border-t border-text-dark/10 pt-7">
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-text-dark/60">
+              Across our social content
+            </p>
+            <dl className="mt-4 grid grid-cols-3 gap-2 sm:gap-6">
+              {[
+                ['Views', '20M+'],
+                ['Likes', '2M+'],
+                ['Shares', '500K+'],
+              ].map(([label, value]) => (
+                <div key={label} className="flex flex-col-reverse gap-1">
+                  <dt className="font-mono text-xs uppercase tracking-wide text-text-dark/65">{label}</dt>
+                  <dd className="text-2xl font-bold tracking-tight text-accent sm:text-4xl">{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
