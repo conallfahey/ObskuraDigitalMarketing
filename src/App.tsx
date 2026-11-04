@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Mail, Send } from 'lucide-react';
+import FAQ from './components/FAQ';
 import MonthlyPartnerships, { partnershipNames } from './components/MonthlyPartnerships';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -764,6 +765,8 @@ export default function App() {
       </section>
 
       <MonthlyPartnerships onSelect={selectPartnership} />
+
+      <FAQ />
 
       <section id="contact" className="bg-background px-6 py-24 md:px-12 lg:px-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
