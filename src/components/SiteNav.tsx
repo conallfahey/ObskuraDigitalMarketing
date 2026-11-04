@@ -12,7 +12,6 @@ const groups = [
     { label: 'Video Production', to: '/#video-production' },
   ] },
   { label: 'Pricing', links: [
-    { label: 'Investment', to: '/#investment' },
     { label: 'Monthly Partnerships', to: '/#monthly-partnerships' },
   ] },
 ] as const;

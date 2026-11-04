@@ -1,3 +1,5 @@
+import { Plus } from 'lucide-react';
+
 export const partnershipNames = ['Market Foundation', 'Market Growth', 'Custom Partnership'] as const;
 
 export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: string) => void }) {
@@ -5,7 +7,7 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
     <section id="monthly-partnerships" aria-labelledby="monthly-partnerships-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
       <div className="mx-auto max-w-7xl">
         <h2 id="monthly-partnerships-heading" className="text-4xl font-bold tracking-tight md:text-5xl">
-          <span className="text-accent">05 //</span> Monthly Partnerships
+          <span className="text-accent">04 //</span> Monthly Partnerships
         </h2>
         <p className="mt-4 text-xl font-semibold">Choose the monthly scope that fits your business.</p>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-dark/70">Every plan includes production, social management, advertising management, and local SEO. Ad spend is separate.</p>
@@ -73,9 +75,13 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
           </div>
           <p>We create or set up your company accounts and handle content planning, captions, scheduling, publishing, and day-to-day management. Instagram, Facebook, TikTok, and YouTube—up to four accounts, selected together. You keep ownership; we handle the work. Cross-posting one video does not increase your video count.</p>
         </div>
-        <details className="mt-6 rounded-2xl border border-text-dark/15 p-5">
-          <summary className="cursor-pointer font-bold">Compare the partnership scope +</summary>
-          <div className="mt-4 overflow-x-auto">
+        <div className="mt-6 divide-y divide-text-dark/15 overflow-hidden rounded-2xl border border-text-dark/15">
+        <details className="group">
+          <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 font-bold transition-colors hover:bg-primary/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent sm:px-8 [&::-webkit-details-marker]:hidden">
+            <span>Compare the partnership scope</span>
+            <Plus aria-hidden="true" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-45" />
+          </summary>
+          <div className="overflow-x-auto border-t border-text-dark/10 px-3 pb-5 pt-3 sm:px-5">
             <table className="w-full min-w-[42rem] border-collapse text-left text-sm [&_td]:border-t [&_td]:border-text-dark/10 [&_td]:p-3 [&_th]:p-3">
               <thead>
                 <tr><th>Monthly capacity</th><th>Foundation / $15K</th><th>Growth / $30K</th><th>Custom / $75K+</th></tr>
@@ -93,12 +99,18 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
             </table>
           </div>
         </details>
-        <details className="mt-4 space-y-4 rounded-2xl border border-text-dark/15 p-5">
-          <summary className="cursor-pointer font-bold">Engagement details +</summary>
+        <details className="group">
+          <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 font-bold transition-colors hover:bg-primary/50 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent sm:px-8 [&::-webkit-details-marker]:hidden">
+            <span>Engagement details</span>
+            <Plus aria-hidden="true" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-45" />
+          </summary>
+          <div className="space-y-4 border-t border-text-dark/10 px-6 py-6 text-sm leading-relaxed text-text-dark/70 sm:px-8">
           <p>All retainers include creative planning, production, social management, paid advertising management, and local SEO. Website and search work is prioritized around your actual needs; the proposal defines the implementation workload. Custom partnerships start at $75K/month, with final pricing tailored to your agreed campaign and production needs.</p>
           <p>Proposed initial term: 6 months, then monthly with 30 days’ notice. One company or branch and one website form the starting scope, with geography and production logistics agreed together. Additional branches and markets are quoted separately. Media spend, travel outside the agreed production area, CRM/call-tracking subscriptions, full website rebuilds, and specialist production costs are additional.</p>
           <p>Two consolidated revision rounds per asset. Monthly allowances do not roll over. Short-form content is part of the included video count; cross-posts do not increase the count. Ad variations may reuse footage with different hooks, offers, or calls to action. Final availability and scope are confirmed in the signed agreement.</p>
+          </div>
         </details>
+        </div>
       </div>
     </section>
   );

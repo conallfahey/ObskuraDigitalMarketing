@@ -783,3 +783,16 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-text-dark/40;
 }
+
+.hero-stat-chart {
+  height: 24px;
+  max-width: 112px;
+  flex-shrink: 0;
+}
+
+.hero-stat-bar {
+  display: block;
+  width: 6px;
+  border-radius: 2px 2px 0 0;
+  background: rgba(230, 59, 46, 0.3);
+}

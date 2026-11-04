@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Mail, Send } from 'lucide-react';
 import FAQ from './components/FAQ';
+import HeroStats from './components/HeroStats';
 import MonthlyPartnerships, { partnershipNames } from './components/MonthlyPartnerships';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -258,8 +259,8 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent"></div>
         </div>
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 pb-12 pt-28 md:pt-32 lg:grid-cols-[1.2fr_1fr]">
-          <div className="hero-content mx-auto flex max-w-4xl flex-col items-center text-center lg:items-start lg:text-left">
+        <div className="relative z-10 mx-auto w-full max-w-7xl pb-12 pt-32 md:pb-16 md:pt-36">
+          <div className="hero-content mx-auto flex max-w-4xl flex-col items-center text-center">
             <h1 className="text-5xl md:text-7xl lg:text-[4.4rem] xl:text-[5rem] leading-[0.92] tracking-tight mb-6 text-balance">
               <span className="block font-bold mb-4">Bridging the gap between</span>
               <span className="hero-word-shell">
@@ -276,7 +277,7 @@ export default function App() {
             <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-10 leading-relaxed text-balance">
               Marketing for home-service businesses. We connect content, ads, websites, and follow-up to help turn local interest into booked jobs.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+            <div className="flex flex-wrap items-center justify-center gap-4">
               <a href="#contact" className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
                 <span className="relative z-10">Book a strategy call</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
@@ -289,14 +290,8 @@ export default function App() {
                 </span>
               </div>
             </div>
+            <HeroStats />
           </div>
-          <img
-            src="/images/obskura-house.svg"
-            alt="Animated house with the Obskura logo on its facade"
-            width="560"
-            height="500"
-            className="mx-auto w-full max-w-md rounded-3xl shadow-lg lg:max-w-none"
-          />
         </div>
       </section>
 
@@ -333,23 +328,6 @@ export default function App() {
                 ))}
               </ul>
             </div>
-          </div>
-          <div className="mt-10 border-t border-text-dark/10 pt-7">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-text-dark/60">
-              Across our social content
-            </p>
-            <dl className="mx-auto mt-4 grid max-w-4xl grid-cols-3 gap-2 text-center sm:gap-6">
-              {[
-                ['Views', '20M+'],
-                ['Likes', '2M+'],
-                ['Shares', '500K+'],
-              ].map(([label, value]) => (
-                <div key={label} className="flex flex-col-reverse gap-1">
-                  <dt className="font-mono text-xs uppercase tracking-wide text-text-dark/65">{label}</dt>
-                  <dd className="text-2xl font-bold tracking-tight text-accent sm:text-4xl">{value}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
       </section>
@@ -738,32 +716,6 @@ export default function App() {
         </div>
       </section>
 
-      <section id="investment" aria-labelledby="investment-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
-            <h2 id="investment-heading" className="mb-4 flex items-center gap-4 text-4xl font-bold tracking-tight md:text-5xl"><span className="text-accent">04 //</span> Investment</h2>
-            <p className="max-w-xl text-lg leading-relaxed text-text-dark/65">Three ways to work together. A clear scope and a custom quote for your business.</p>
-          </div>
-          <div className="border-t border-text-dark/20">
-            {investmentPackages.map(plan => (
-              <article key={plan.name} className="grid items-center gap-5 border-b border-text-dark/15 py-7 md:grid-cols-[1fr_1.4fr_auto] md:gap-10 md:py-9">
-                <div>
-                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-text-dark/45">{plan.format}</p>
-                  <h3 className="text-2xl font-semibold tracking-tight">{plan.name}</h3>
-                </div>
-                <p className="max-w-lg text-base leading-relaxed text-text-dark/65">{plan.description}</p>
-                <a href="#contact" onClick={() => selectInvestment(plan.name)} aria-label={`Discuss ${plan.name}`} className="inline-flex w-fit items-center gap-4 py-2 text-sm font-semibold transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">Let’s talk <span aria-hidden="true" className="text-accent">↗</span></a>
-              </article>
-            ))}
-          </div>
-          <p className="mt-6 text-xs leading-relaxed text-text-dark/50">Pricing and deliverables are agreed before we start. Advertising spend is separate.</p>
-          <p className="mt-4 text-sm text-text-dark/70">
-            For a monthly retainer with defined deliverables, explore our{' '}
-            <a href="#monthly-partnerships" className="font-semibold underline underline-offset-4 hover:text-accent">Monthly Partnerships</a>.
-          </p>
-        </div>
-      </section>
-
       <MonthlyPartnerships onSelect={selectPartnership} />
 
       <FAQ />
@@ -937,8 +889,8 @@ export default function App() {
                 <Link to="/team" className="hover:text-accent transition-colors">
                   Team
                 </Link>
-                <a href="#investment" className="hover:text-accent transition-colors">
-                  Investment
+                <a href="#monthly-partnerships" className="hover:text-accent transition-colors">
+                  Monthly Partnerships
                 </a>
                 <a href="#contact" className="hover:text-accent transition-colors">
                   Contact
