@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { Mail, Send } from 'lucide-react';
+import MonthlyPartnerships, { partnershipNames } from './components/MonthlyPartnerships';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,24 +69,6 @@ const caseStudyProofCards = [
 ];
 
 const contactEmail = 'conall@obskuraagency.com';
-const investmentPackages = [
-  {
-    name: 'Foundation',
-    format: 'Project investment',
-    description: 'A clear website, service pages, and quote forms that help customers get in touch.',
-  },
-  {
-    name: 'Local Growth',
-    format: 'Monthly investment',
-    description: 'Local SEO, Google Business Profile support, and ongoing website improvements.',
-  },
-  {
-    name: 'Connected Marketing',
-    format: 'Monthly investment + setup',
-    description: 'Local Growth, plus paid ads, video content, and CRM follow-up working together.',
-  },
-];
-
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
@@ -238,9 +221,9 @@ export default function App() {
           <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent"></div>
         </div>
 
-        <div className="relative z-10 w-full max-w-6xl mx-auto">
-          <div className="hero-content max-w-4xl mx-auto text-center flex flex-col items-center pt-24 md:pt-28">
-            <h1 className="text-5xl md:text-7xl lg:text-[5.6rem] leading-[0.92] tracking-tight mb-6 text-balance">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 pb-12 pt-28 md:pt-32 lg:grid-cols-[1.2fr_1fr]">
+          <div className="hero-content mx-auto flex max-w-4xl flex-col items-center text-center lg:items-start lg:text-left">
+            <h1 className="text-5xl md:text-7xl lg:text-[4.4rem] xl:text-[5rem] leading-[0.92] tracking-tight mb-6 text-balance">
               <span className="block font-bold mb-4">Bridging the gap between</span>
               <span className="hero-word-shell">
                 <span className="hero-word-glow" aria-hidden="true"></span>
@@ -253,17 +236,10 @@ export default function App() {
                 </span>
               </span>
             </h1>
-            <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-4 leading-relaxed text-balance">
+            <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-10 leading-relaxed text-balance">
               Marketing for home-service businesses. We connect content, ads, websites, and follow-up to help turn local interest into booked jobs.
             </p>
-            <img
-              src="/images/obskura-hero-mark.svg"
-              alt=""
-              width="64"
-              height="64"
-              className="mb-5 size-14 opacity-90 md:size-16"
-            />
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 lg:justify-start">
               <a href="#contact" className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
                 <span className="relative z-10">Book a strategy call</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">→</span>
@@ -277,6 +253,13 @@ export default function App() {
               </div>
             </div>
           </div>
+          <img
+            src="/images/obskura-house.svg"
+            alt="Animated house with the Obskura logo on its facade"
+            width="560"
+            height="500"
+            className="mx-auto w-full max-w-md rounded-3xl shadow-lg lg:max-w-none"
+          />
         </div>
       </section>
 
@@ -347,9 +330,9 @@ export default function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="group relative bg-[#1A1A1A] text-[#F5F3EE] p-8 rounded-2xl border border-[#F5F3EE]/10 shadow-sm transition-all overflow-hidden h-[400px] flex flex-col hover:-translate-y-1">
-              <div className="flex justify-between items-start mb-auto">
-                <h3 className="text-2xl font-bold font-sans">Content & Paid Ads</h3>
-                <div className="flex items-center gap-2">
+              <div className="flex justify-between items-start gap-3 mb-auto">
+                <h3 className="text-2xl font-bold font-sans">Video Production, Short Form Content &amp; Paid Ads</h3>
+                <div className="flex shrink-0 items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                   <span className="font-mono text-xs text-[#F5F3EE]/50 uppercase tracking-widest relative">
                     Live Feed
@@ -695,27 +678,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="investment" aria-labelledby="investment-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
-            <h2 id="investment-heading" className="mb-4 flex items-center gap-4 text-4xl font-bold tracking-tight md:text-5xl"><span className="text-accent">04 //</span> Investment</h2>
-            <p className="max-w-xl text-lg leading-relaxed text-text-dark/65">Three ways to work together. A clear scope and a custom quote for your business.</p>
-          </div>
-          <div className="border-t border-text-dark/20">
-            {investmentPackages.map(plan => (
-              <article key={plan.name} className="grid items-center gap-5 border-b border-text-dark/15 py-7 md:grid-cols-[1fr_1.4fr_auto] md:gap-10 md:py-9">
-                <div>
-                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-text-dark/45">{plan.format}</p>
-                  <h3 className="text-2xl font-semibold tracking-tight">{plan.name}</h3>
-                </div>
-                <p className="max-w-lg text-base leading-relaxed text-text-dark/65">{plan.description}</p>
-                <a href="#contact" onClick={() => setSelectedInvestment(plan.name)} aria-label={`Discuss ${plan.name}`} className="inline-flex w-fit items-center gap-4 py-2 text-sm font-semibold transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">Let’s talk <span aria-hidden="true" className="text-accent">↗</span></a>
-              </article>
-            ))}
-          </div>
-          <p className="mt-6 text-xs leading-relaxed text-text-dark/50">Pricing and deliverables are agreed before we start. Advertising spend is separate.</p>
-        </div>
-      </section>
+      <MonthlyPartnerships onSelect={setSelectedInvestment} />
 
       <section id="contact" className="bg-background px-6 py-24 md:px-12 lg:px-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -752,7 +715,7 @@ export default function App() {
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Investment package</span>
                 <select name="investment_package" value={selectedInvestment} onChange={event => setSelectedInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
                   <option value="">Help me choose / custom scope</option>
-                  {investmentPackages.map(plan => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
+                  {partnershipNames.map(name => <option key={name} value={name}>{name}</option>)}
                 </select>
               </label>
               <label className="block">
