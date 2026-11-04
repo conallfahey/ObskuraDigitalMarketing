@@ -7,8 +7,8 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
         <h2 id="monthly-partnerships-heading" className="text-4xl font-bold tracking-tight md:text-5xl">
           <span className="text-accent">05 //</span> Monthly Partnerships
         </h2>
-        <p className="mt-4 text-xl font-semibold">Three ways to work together.</p>
-        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-dark/70">Choose your monthly capacity. Every plan includes production, social management, advertising management, and local SEO. Ad spend is separate.</p>
+        <p className="mt-4 text-xl font-semibold">Choose the monthly scope that fits your business.</p>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-dark/70">Every plan includes production, social management, advertising management, and local SEO. Ad spend is separate.</p>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           <article className="flex flex-col rounded-3xl border border-text-dark/15 p-6 sm:p-8">
             <div className="mb-3 font-mono text-xs uppercase tracking-widest text-text-dark/65">01 / Foundation
