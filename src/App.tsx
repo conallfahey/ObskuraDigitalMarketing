@@ -69,11 +69,47 @@ const caseStudyProofCards = [
 ];
 
 const contactEmail = 'conall@obskuraagency.com';
+const investmentPackages = [
+  {
+    name: 'Foundation',
+    format: 'Project investment',
+    description: 'A clear website, service pages, and quote forms that help customers get in touch.',
+  },
+  {
+    name: 'Local Growth',
+    format: 'Monthly investment',
+    description: 'Local SEO, Google Business Profile support, and ongoing website improvements.',
+  },
+  {
+    name: 'Connected Marketing',
+    format: 'Monthly investment + setup',
+    description: 'Local Growth, plus paid ads, video content, and CRM follow-up working together.',
+  },
+];
+
+const monthlyPartnership = 'Monthly Partnership';
+const productionVideos = [
+  { title: 'On the Job', file: 'umbrella-roofing-03.mp4', poster: 'umbrella-03-poster-selected.jpg' },
+  { title: 'Client Story', file: 'umbrella-roofing-01.mp4', poster: 'umbrella-01-poster-selected.jpg' },
+];
+
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(0);
   const [selectedInvestment, setSelectedInvestment] = useState('');
+  const [selectedPartnership, setSelectedPartnership] = useState('');
+
+  function selectInvestment(name: string) {
+    setSelectedInvestment(name);
+    setSelectedPartnership('');
+  }
+
+  function selectPartnership(name: string) {
+    setSelectedInvestment(monthlyPartnership);
+    setSelectedPartnership(name);
+  }
+
   const contactRedirectUrl = `${window.location.origin}/thank-you`;
 
   useEffect(() => {
@@ -301,7 +337,7 @@ export default function App() {
             <p className="font-mono text-xs uppercase tracking-[0.22em] text-text-dark/60">
               Across our social content
             </p>
-            <dl className="mt-4 grid grid-cols-3 gap-2 sm:gap-6">
+            <dl className="mx-auto mt-4 grid max-w-4xl grid-cols-3 gap-2 text-center sm:gap-6">
               {[
                 ['Views', '20M+'],
                 ['Likes', '2M+'],
@@ -611,6 +647,29 @@ export default function App() {
         </div>
       </section>
 
+      <section id="video-production" aria-labelledby="video-production-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <h2 id="video-production-heading" className="mb-8 text-4xl font-bold tracking-tight md:text-5xl">Video Production</h2>
+          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+            {productionVideos.map(video => (
+              <article key={video.file} className="rounded-3xl border border-text-dark/10 bg-primary p-4 sm:p-5">
+                <video
+                  controls
+                  playsInline
+                  preload="none"
+                  aria-label={video.title}
+                  poster={`/images/agency/${video.poster}`}
+                  className="mx-auto aspect-[9/16] w-full max-w-72 rounded-xl bg-black object-contain"
+                >
+                  <source src={`/images/agency/${video.file}`} type="video/mp4" />
+                </video>
+                <h3 className="mt-4 text-center text-xl font-semibold">{video.title}</h3>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="process" className="relative bg-background py-24">
         <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24 mb-16 text-center">
           <h2 className="text-4xl md:text-5xl font-sans font-bold tracking-tight flex items-center justify-center gap-4 mb-4">
@@ -678,7 +737,33 @@ export default function App() {
         </div>
       </section>
 
-      <MonthlyPartnerships onSelect={setSelectedInvestment} />
+      <section id="investment" aria-labelledby="investment-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12">
+            <h2 id="investment-heading" className="mb-4 flex items-center gap-4 text-4xl font-bold tracking-tight md:text-5xl"><span className="text-accent">04 //</span> Investment</h2>
+            <p className="max-w-xl text-lg leading-relaxed text-text-dark/65">Three ways to work together. A clear scope and a custom quote for your business.</p>
+          </div>
+          <div className="border-t border-text-dark/20">
+            {investmentPackages.map(plan => (
+              <article key={plan.name} className="grid items-center gap-5 border-b border-text-dark/15 py-7 md:grid-cols-[1fr_1.4fr_auto] md:gap-10 md:py-9">
+                <div>
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-text-dark/45">{plan.format}</p>
+                  <h3 className="text-2xl font-semibold tracking-tight">{plan.name}</h3>
+                </div>
+                <p className="max-w-lg text-base leading-relaxed text-text-dark/65">{plan.description}</p>
+                <a href="#contact" onClick={() => selectInvestment(plan.name)} aria-label={`Discuss ${plan.name}`} className="inline-flex w-fit items-center gap-4 py-2 text-sm font-semibold transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">Let’s talk <span aria-hidden="true" className="text-accent">↗</span></a>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 text-xs leading-relaxed text-text-dark/50">Pricing and deliverables are agreed before we start. Advertising spend is separate.</p>
+          <p className="mt-4 text-sm text-text-dark/70">
+            For a monthly retainer with defined deliverables, explore our{' '}
+            <a href="#monthly-partnerships" className="font-semibold underline underline-offset-4 hover:text-accent">Monthly Partnerships</a>.
+          </p>
+        </div>
+      </section>
+
+      <MonthlyPartnerships onSelect={selectPartnership} />
 
       <section id="contact" className="bg-background px-6 py-24 md:px-12 lg:px-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
@@ -713,11 +798,21 @@ export default function App() {
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <label className="block md:col-span-2">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Investment package</span>
-                <select name="investment_package" value={selectedInvestment} onChange={event => setSelectedInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
+                <select name="investment_package" value={selectedInvestment} onChange={event => selectInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
                   <option value="">Help me choose / custom scope</option>
-                  {partnershipNames.map(name => <option key={name} value={name}>{name}</option>)}
+                  {investmentPackages.map(plan => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
+                  <option value={monthlyPartnership}>{monthlyPartnership}</option>
                 </select>
               </label>
+              {selectedInvestment === monthlyPartnership && (
+                <label className="block md:col-span-2">
+                  <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Monthly partnership</span>
+                  <select name="monthly_partnership" required value={selectedPartnership} onChange={event => setSelectedPartnership(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
+                    <option value="">Select a monthly partnership</option>
+                    {partnershipNames.map(name => <option key={name} value={name}>{name}</option>)}
+                  </select>
+                </label>
+              )}
               <label className="block">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
                   Name

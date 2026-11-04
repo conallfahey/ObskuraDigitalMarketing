@@ -2,11 +2,12 @@ export const partnershipNames = ['Market Foundation', 'Market Growth', 'Custom P
 
 export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: string) => void }) {
   return (
-    <section id="investment" aria-labelledby="investment-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
+    <section id="monthly-partnerships" aria-labelledby="monthly-partnerships-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
       <div className="mx-auto max-w-7xl">
-        <div className="font-mono text-xs uppercase tracking-[0.22em] text-accent">Monthly partnerships
-        </div>
-        <h2 id="investment-heading" className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">Three ways to work together.</h2>
+        <h2 id="monthly-partnerships-heading" className="text-4xl font-bold tracking-tight md:text-5xl">
+          <span className="text-accent">05 //</span> Monthly Partnerships
+        </h2>
+        <p className="mt-4 text-xl font-semibold">Three ways to work together.</p>
         <p className="mt-4 max-w-2xl text-lg leading-relaxed text-text-dark/70">Choose your monthly capacity. Every plan includes production, social management, advertising management, and local SEO. Ad spend is separate.</p>
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
           <article className="flex flex-col rounded-3xl border border-text-dark/15 p-6 sm:p-8">
