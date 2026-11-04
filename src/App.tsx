@@ -804,9 +804,18 @@ export default function App() {
                 <select name="investment_package" value={selectedInvestment} onChange={event => selectInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
                   <option value="">Help me choose / custom scope</option>
                   {investmentPackages.map(plan => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
-                  <option value={monthlyPartnership}>{monthlyPartnership}</option>
+                  <option className="font-bold text-accent" value={monthlyPartnership}>{monthlyPartnership}</option>
                 </select>
               </label>
+              {selectedInvestment !== monthlyPartnership && (
+                <button
+                  type="button"
+                  onClick={() => selectInvestment(monthlyPartnership)}
+                  className="-mt-2 w-fit text-left text-sm font-bold text-accent underline decoration-2 underline-offset-4 hover:text-text-dark md:col-span-2"
+                >
+                  Choose Monthly Partnership
+                </button>
+              )}
               {selectedInvestment === monthlyPartnership && (
                 <label className="block md:col-span-2">
                   <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Monthly partnership</span>
@@ -849,12 +858,13 @@ export default function App() {
                   placeholder="Business name"
                 />
               </label>
-              <label className="block">
+              <label className={selectedInvestment === monthlyPartnership ? 'hidden' : 'block'}>
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
                   Project Type
                 </span>
                 <select
                   name="project_type"
+                  disabled={selectedInvestment === monthlyPartnership}
                   className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
                   defaultValue=""
                 >

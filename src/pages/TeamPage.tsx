@@ -33,9 +33,8 @@ export default function TeamPage() {
         </header>
 
         <section aria-label="Team members" className="border-t border-text-dark/25">
-          {team.map((person, index) => (
-            <article key={person.photo} className="grid grid-cols-[1rem_minmax(0,1fr)_auto] items-center gap-4 border-b border-text-dark/20 py-9 sm:grid-cols-[3rem_minmax(0,1fr)_auto] sm:gap-6 md:py-12">
-              <span aria-hidden="true" className="self-start pt-2 font-mono text-xs text-accent md:pt-3">0{index + 1}</span>
+          {team.map(person => (
+            <article key={person.photo} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-text-dark/20 py-9 sm:gap-6 md:py-12">
               <h2 className="text-2xl font-medium leading-[1.1] tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-6xl">
                 {person.first} <span className="font-serif font-normal italic">{person.last}</span>
               </h2>
