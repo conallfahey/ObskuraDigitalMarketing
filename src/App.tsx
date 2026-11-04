@@ -6,7 +6,7 @@ import { Mail, Send } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const heroWords = ['Marketing', 'Content', 'Code', 'Design', 'Systems'];
+const heroWords = ['Marketing', 'Content', 'Websites', 'Systems'];
 const protocolBarHeights = [42, 68, 55, 84, 46, 76, 61, 92, 58, 71, 49, 88];
 const partnerLogos = [
   {
@@ -68,11 +68,29 @@ const caseStudyProofCards = [
 ];
 
 const contactEmail = 'conall@obskuraagency.com';
+const investmentPackages = [
+  {
+    name: 'Foundation',
+    format: 'Project investment',
+    description: 'A clear website, service pages, and quote forms that help customers get in touch.',
+  },
+  {
+    name: 'Local Growth',
+    format: 'Monthly investment',
+    description: 'Local SEO, Google Business Profile support, and ongoing website improvements.',
+  },
+  {
+    name: 'Connected Marketing',
+    format: 'Monthly investment + setup',
+    description: 'Local Growth, plus paid ads, video content, and CRM follow-up working together.',
+  },
+];
 
 export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(0);
+  const [selectedInvestment, setSelectedInvestment] = useState('');
   const contactRedirectUrl = `${window.location.origin}/thank-you`;
 
   useEffect(() => {
@@ -90,12 +108,6 @@ export default function App() {
         stagger: 0.1,
         ease: 'power3.out',
         delay: 0.2,
-      });
-
-      ScrollTrigger.create({
-        start: 'top -50',
-        end: 99999,
-        toggleClass: { className: 'nav-scrolled', targets: '.main-nav' },
       });
 
       gsap.from('.manifesto-line', {
@@ -215,40 +227,6 @@ export default function App() {
       ref={containerRef}
       className="bg-background min-h-screen font-sans selection:bg-accent selection:text-white"
     >
-      <nav className="main-nav fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 w-[90%] max-w-5xl rounded-full bg-background/60 backdrop-blur-xl border border-text-dark/10 transition-all duration-300">
-        <div className="flex items-center gap-3">
-          <Link to="/">
-            <img
-              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
-              alt="Obskura Logo"
-              className="h-9 object-contain saturate-200"
-            />
-          </Link>
-          <Link to="/" className="text-xl font-bold tracking-tight">
-            Obskura
-          </Link>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="#services" className="hover-lift hover:text-accent transition-colors">
-            Services
-          </a>
-          <Link to="/work-index" className="hover-lift hover:text-accent transition-colors">
-            Work Index
-          </Link>
-          <a href="#case-studies" className="hover-lift hover:text-accent transition-colors">
-            Case Studies
-          </a>
-          <a href="#process" className="hover-lift hover:text-accent transition-colors">
-            Process
-          </a>
-        </div>
-        <a href="#contact" className="magnetic-btn bg-text-dark text-background px-5 py-2 rounded-full text-sm font-medium group">
-          <span className="relative z-10 flex items-center gap-2">
-            Contact <span className="text-accent group-hover:text-background transition-colors">{'↗\uFE0E'}</span>
-          </span>
-          <span className="hover-bg bg-accent"></span>
-        </a>
-      </nav>
 
       <section className="relative min-h-[100dvh] w-full overflow-hidden flex items-center px-6 md:px-12 lg:px-24">
         <div className="absolute inset-0 z-0">
@@ -276,7 +254,7 @@ export default function App() {
               </span>
             </h1>
             <p className="max-w-2xl text-lg md:text-xl text-text-dark/80 font-medium mb-10 leading-relaxed text-balance">
-              Obskura is a Chicago digital marketing agency that turns attention into measurable growth.
+              Marketing for home-service businesses. We connect content, ads, websites, and follow-up to help turn local interest into booked jobs.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <a href="#contact" className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold text-lg inline-flex items-center gap-3 group">
@@ -310,7 +288,7 @@ export default function App() {
                 Partners and clients
               </h2>
               <p className="mt-3 text-xl md:text-2xl font-bold tracking-tight max-w-md lg:max-w-none">
-                Trusted by teams building memorable moments.
+                Creative work. Real business relationships.
               </p>
             </div>
 
@@ -339,14 +317,14 @@ export default function App() {
               <span className="text-accent">01 //</span> Services
             </h2>
             <p className="font-mono text-text-dark/60 max-w-xl">
-              Everything you need to look sharp, get noticed, and turn attention into real business.
+              Built for movers, cleaners, contractors, and other home-service teams: get found, earn trust, and make it easier to book.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="group relative bg-[#1A1A1A] text-[#F5F3EE] p-8 rounded-2xl border border-[#F5F3EE]/10 shadow-sm transition-all overflow-hidden h-[400px] flex flex-col hover:-translate-y-1">
               <div className="flex justify-between items-start mb-auto">
-                <h3 className="text-2xl font-bold font-sans">Video Marketing</h3>
+                <h3 className="text-2xl font-bold font-sans">Content & Paid Ads</h3>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
                   <span className="font-mono text-xs text-[#F5F3EE]/50 uppercase tracking-widest relative">
@@ -382,7 +360,7 @@ export default function App() {
                 </div>
               </div>
               <p className="text-[#F5F3EE]/60 mt-6 font-medium">
-                We plan, film, edit, and publish content that keeps your brand active and relevant.
+                Show your team and your work through video and paid campaigns that help local customers choose your business.
               </p>
             </div>
 
@@ -421,7 +399,7 @@ export default function App() {
                 </div>
               </div>
               <p className="text-text-dark/70 mt-6 font-medium">
-                We build websites that make your business easier to trust, understand, and contact.
+                Clear service pages, local proof, and simple quote forms that make it easier for customers to request a job.
               </p>
             </div>
 
@@ -429,7 +407,7 @@ export default function App() {
               <div className="absolute inset-0 seo-signal-grid opacity-60"></div>
               <div className="absolute inset-x-0 top-0 h-24 seo-signal-glow"></div>
               <div className="flex justify-between items-start mb-auto relative z-10">
-                <h3 className="text-2xl font-bold font-sans">SEO</h3>
+                <h3 className="text-2xl font-bold font-sans">Local SEO</h3>
                 <span className="font-mono text-xs px-3 py-1 bg-background rounded-full border border-text-dark/10">
                   Signal Map
                 </span>
@@ -462,7 +440,7 @@ export default function App() {
                 <span className="seo-link seo-link-bottom"></span>
               </div>
               <p className="text-text-dark/70 relative z-10 mt-6 font-medium">
-                We help the right customers find you when they are already looking for what you offer.
+                Help nearby customers find your services through local search, service-area pages, and a stronger Google Business Profile.
               </p>
             </div>
 
@@ -491,7 +469,7 @@ export default function App() {
                 </div>
               </div>
               <p className="text-[#E8E4DD]/60 mt-6 font-medium">
-                We automate the repetitive follow-up work so leads do not slip through the cracks.
+                Keep inquiries, quotes, and follow-up in one place so your team can respond quickly and keep jobs moving.
               </p>
             </div>
           </div>
@@ -505,27 +483,26 @@ export default function App() {
               <span className="text-accent">02 //</span> Proof With Teeth
             </h2>
             <p className="font-mono text-text-dark/60 max-w-xl">
-              We do not deal in hypotheticals. We build architectural assets that command real market share.
+              See how we connected content, ads, local search, and follow-up for a Chicago moving company.
             </p>
           </div>
 
-          <div className="mb-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {caseStudyProofCards.map((card) => (
-              <Link
+          <div className="mb-10 grid grid-cols-1 border-y border-text-dark/20 sm:grid-cols-2 lg:grid-cols-4">
+            {caseStudyProofCards.map((card, index) => (
+              <div
                 key={card.label}
-                to="/case-studies/comfort-moving-chicago"
-                className="group rounded-2xl border border-text-dark/10 bg-background p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/35"
+                className={`py-5 ${index > 0 ? 'border-t border-text-dark/15' : ''} ${index % 2 === 1 ? 'sm:border-l sm:pl-6' : 'sm:pr-6'} ${index < 2 ? 'sm:border-t-0' : ''} ${index > 0 ? 'lg:border-l lg:border-t-0 lg:pl-6' : ''} lg:pr-6`}
               >
-                <p className="mb-5 font-serif text-5xl italic leading-none tracking-tight text-accent">
+                <p className={`mb-2 leading-none tracking-tight ${index === 0 ? 'font-serif text-4xl italic text-accent md:text-5xl' : 'pt-1 font-sans text-3xl font-semibold text-text-dark md:pt-2 md:text-4xl'}`}>
                   {card.metric}
                 </p>
-                <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-text-dark/45">
+                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-dark/55">
                   {card.label}
                 </p>
-                <p className="text-sm font-semibold leading-relaxed text-text-dark/72">
+                <p className="max-w-[15rem] text-xs leading-relaxed text-text-dark/65">
                   {card.detail}
                 </p>
-              </Link>
+              </div>
             ))}
           </div>
 
@@ -633,7 +610,7 @@ export default function App() {
             <span className="text-accent">03 //</span> How We Work
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-text-dark/65 font-medium leading-relaxed">
-            Full-service creative marketing without the jargon. We help you get clear on the message, create the assets, and keep growth moving.
+            A practical marketing plan for your services, your area, and the customers you want to reach.
           </p>
         </div>
 
@@ -643,7 +620,7 @@ export default function App() {
               <span className="font-mono text-xl text-text-dark/40 block mb-4">001</span>
               <h3 className="text-3xl font-bold font-sans mb-4">Clarify the brand and the offer</h3>
               <p className="text-text-dark/70 font-medium max-w-lg leading-relaxed">
-                We start by understanding your business, your customers, and what actually makes you different so your marketing feels focused instead of scattered.
+                We learn which jobs you want, where you work, and why customers choose you. Then we build a message and plan around those priorities.
               </p>
             </div>
             <div className="w-full min-h-[240px] md:min-h-[300px] bg-background/50 rounded-xl border border-text-dark/10 flex items-center justify-center relative overflow-hidden">
@@ -658,7 +635,7 @@ export default function App() {
               <span className="font-mono text-xl text-text-dark/40 block mb-4">002</span>
               <h3 className="text-3xl font-bold font-sans mb-4">Create the assets that move people</h3>
               <p className="text-text-dark/70 font-medium max-w-lg leading-relaxed">
-                From strategy and messaging to video, websites, content, and campaigns, we build the pieces your business needs to look credible and convert attention into action.
+                We create the content, service pages, and campaigns that show the quality of your work and give customers a clear way to get a quote.
               </p>
             </div>
             <div className="w-full min-h-[240px] md:min-h-[300px] bg-[#1A1A1A] rounded-xl border border-[#1A1A1A]/10 flex items-center justify-center relative overflow-hidden">
@@ -672,7 +649,7 @@ export default function App() {
               <span className="font-mono text-xl text-[#E8E4DD]/40 block mb-4">003</span>
               <h3 className="text-3xl font-bold font-sans mb-4">Manage, improve, and keep momentum</h3>
               <p className="text-[#E8E4DD]/70 font-medium max-w-lg leading-relaxed">
-                Once things are live, we keep refining what works, improving what does not, and helping you stay visible without needing to become a marketing expert yourself.
+                We review inquiries, campaign results, and follow-up to see what brings useful leads and where the booking process needs work.
               </p>
             </div>
             <div className="w-full min-h-[240px] md:min-h-[300px] bg-black/40 rounded-xl border border-[#E8E4DD]/10 flex items-center justify-center relative overflow-hidden">
@@ -694,6 +671,28 @@ export default function App() {
         </div>
       </section>
 
+      <section id="investment" aria-labelledby="investment-heading" className="border-t border-text-dark/10 bg-background px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12">
+            <h2 id="investment-heading" className="mb-4 flex items-center gap-4 text-4xl font-bold tracking-tight md:text-5xl"><span className="text-accent">04 //</span> Investment</h2>
+            <p className="max-w-xl text-lg leading-relaxed text-text-dark/65">Three ways to work together. A clear scope and a custom quote for your business.</p>
+          </div>
+          <div className="border-t border-text-dark/20">
+            {investmentPackages.map(plan => (
+              <article key={plan.name} className="grid items-center gap-5 border-b border-text-dark/15 py-7 md:grid-cols-[1fr_1.4fr_auto] md:gap-10 md:py-9">
+                <div>
+                  <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em] text-text-dark/45">{plan.format}</p>
+                  <h3 className="text-2xl font-semibold tracking-tight">{plan.name}</h3>
+                </div>
+                <p className="max-w-lg text-base leading-relaxed text-text-dark/65">{plan.description}</p>
+                <a href="#contact" onClick={() => setSelectedInvestment(plan.name)} aria-label={`Discuss ${plan.name}`} className="inline-flex w-fit items-center gap-4 py-2 text-sm font-semibold transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-accent">Let’s talk <span aria-hidden="true" className="text-accent">↗</span></a>
+              </article>
+            ))}
+          </div>
+          <p className="mt-6 text-xs leading-relaxed text-text-dark/50">Pricing and deliverables are agreed before we start. Advertising spend is separate.</p>
+        </div>
+      </section>
+
       <section id="contact" className="bg-background px-6 py-24 md:px-12 lg:px-24">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <div>
@@ -701,11 +700,11 @@ export default function App() {
               Contact
             </p>
             <h2 className="mb-6 text-4xl font-bold tracking-tight md:text-5xl">
-              Tell us what you are trying to build.
+              Let's bring more of the right jobs your way.
             </h2>
             <p className="text-lg font-medium leading-relaxed text-text-dark/72">
-              Send over the shape of the project, the timeline, and where things feel stuck. We
-              will reply with a clear next step.
+              Tell us what services you offer, where you work, and what you want to improve.
+              We will reply with a clear next step.
             </p>
             <a
               href={`mailto:${contactEmail}`}
@@ -725,6 +724,13 @@ export default function App() {
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_next" value={contactRedirectUrl} />
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              <label className="block md:col-span-2">
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Investment package</span>
+                <select name="investment_package" value={selectedInvestment} onChange={event => setSelectedInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
+                  <option value="">Help me choose / custom scope</option>
+                  {investmentPackages.map(plan => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
+                </select>
+              </label>
               <label className="block">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
                   Name
@@ -771,6 +777,7 @@ export default function App() {
                     Select one
                   </option>
                   <option>Website</option>
+                  <option>Paid ads</option>
                   <option>SEO</option>
                   <option>Video or content</option>
                   <option>CRM or automation</option>
@@ -786,7 +793,7 @@ export default function App() {
                   required
                   rows={6}
                   className="w-full resize-none rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
-                  placeholder="What are you trying to make happen?"
+                  placeholder="What services do you offer, which areas do you serve, and where do you need help?"
                 ></textarea>
               </label>
             </div>
@@ -807,7 +814,7 @@ export default function App() {
           <div className="max-w-sm">
             <h2 className="text-3xl font-bold tracking-tight mb-4">Obskura</h2>
             <p className="text-[#E8E4DD]/60 font-medium text-lg leading-relaxed mb-8">
-              Turning attention into measurable growth through technical SEO, video, and web engineering.
+              Helping home-service businesses connect local marketing, useful content, and better follow-up.
             </p>
             <div className="flex items-center gap-3 px-5 py-3 rounded border border-[#E8E4DD]/20 bg-[#1A1A1A]/50 w-fit">
               <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] animate-pulse"></div>
@@ -829,11 +836,14 @@ export default function App() {
                 <a href="#case-studies" className="hover:text-accent transition-colors">
                   Case Studies
                 </a>
-                <Link to="/work-index" className="hover:text-accent transition-colors">
-                  Work Index
-                </Link>
                 <a href="#process" className="hover:text-accent transition-colors">
                   Process
+                </a>
+                <Link to="/team" className="hover:text-accent transition-colors">
+                  Team
+                </Link>
+                <a href="#investment" className="hover:text-accent transition-colors">
+                  Investment
                 </a>
                 <a href="#contact" className="hover:text-accent transition-colors">
                   Contact

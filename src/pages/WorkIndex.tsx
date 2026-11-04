@@ -6,7 +6,7 @@ import { ArrowRight, Code2, Film, LayoutGrid, PenLine, Play, Sparkles, X } from 
 
 gsap.registerPlugin(ScrollTrigger);
 
-const featuredWork = [
+const featuredWork: (ViewerItem & { scope: string; summary: string })[] = [
   {
     title: 'Dearly Beloved Campaign Still',
     type: 'Content',
@@ -201,40 +201,6 @@ export default function WorkIndex() {
       ref={containerRef}
       className="bg-background min-h-screen font-sans selection:bg-accent selection:text-white"
     >
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-4 py-2.5 w-[92%] max-w-5xl rounded-full bg-background/90 backdrop-blur-xl border border-text-dark/20 shadow-md transition-all duration-300 sm:top-6 sm:px-6 sm:py-3 sm:w-[90%]">
-        <div className="flex items-center gap-3">
-          <Link to="/">
-            <img
-              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
-              alt="Obskura Logo"
-              className="h-8 object-contain saturate-200 sm:h-9"
-            />
-          </Link>
-          <Link to="/" className="text-lg font-bold tracking-tight sm:text-xl">
-            Obskura
-          </Link>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-dark">
-          <Link to="/#services" className="hover-lift hover:text-accent transition-colors">
-            Services
-          </Link>
-          <Link to="/work-index" className="hover-lift text-accent transition-colors">
-            Work Index
-          </Link>
-          <Link to="/#case-studies" className="hover-lift hover:text-accent transition-colors">
-            Case Studies
-          </Link>
-        </div>
-        <Link
-          to="/#contact"
-          className="magnetic-btn bg-accent text-white px-4 py-2 rounded-full text-sm font-medium group sm:px-5"
-        >
-          <span className="relative z-10 flex items-center gap-2">
-            Contact <ArrowRight size={14} />
-          </span>
-          <span className="hover-bg bg-text-dark"></span>
-        </Link>
-      </nav>
 
       <section className="relative isolate overflow-hidden border-b border-text-dark/10 px-6 pb-12 pt-28 md:px-12 md:pb-20 md:pt-40 lg:px-24">
         <div className="absolute inset-0">
@@ -250,15 +216,14 @@ export default function WorkIndex() {
           <div className="work-hero-content grid grid-cols-1 gap-6 items-end md:gap-12 lg:grid-cols-[1fr_0.72fr]">
             <div>
               <span className="font-mono text-xs tracking-widest text-accent uppercase mb-4 block sm:text-sm sm:mb-6">
-                Work Index // Content / Design / Apps
+                Work Index // Content / Campaigns / Systems
               </span>
               <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] font-serif italic leading-[0.92] tracking-tight mb-4 max-w-5xl md:mb-7">
                 Proof, in motion.
               </h1>
               <p className="max-w-3xl text-base md:text-2xl text-text-dark/78 font-medium leading-relaxed">
-                A living index of the things we make: content systems, design moments, app
-                interfaces, and the small sharp assets that turn strategy into something people
-                can see.
+                Selected content, campaigns, and business systems, including the website,
+                marketing, and lead-management work behind Comfort Moving Chicago.
               </p>
             </div>
 
@@ -420,11 +385,11 @@ export default function WorkIndex() {
           <div className="relative">
             <LayoutGrid className="text-accent mb-5" size={28} />
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-5">
-              Built to become a real portfolio.
+              From first impression to follow-up.
             </h2>
             <p className="text-lg text-[#E8E4DD]/68 leading-relaxed">
-              These placeholders can be swapped for live screenshots, social cuts, campaign
-              stills, and internal app captures as the work archive grows.
+              Explore campaign creative, photography, and digital projects from our work
+              archive, alongside the systems that help turn interest into action.
             </p>
           </div>
           <div className="relative grid grid-cols-3 gap-2 min-h-[210px] md:min-h-[260px] md:gap-3">
@@ -500,7 +465,7 @@ export default function WorkIndex() {
                 <div className="absolute inset-x-5 bottom-5 text-white">
                   <p className="font-bold text-xl leading-tight">{activeViewerItem.title}</p>
                   <p className="mt-2 text-sm text-white/70">
-                    Instagram-style video preview. Drop in the final Reel/video URL when ready.
+                    Campaign still. Video playback is not available in this preview.
                   </p>
                 </div>
               </div>

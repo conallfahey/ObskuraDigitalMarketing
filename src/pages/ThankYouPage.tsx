@@ -4,26 +4,6 @@ import { ArrowRight, CheckCircle2, Mail } from 'lucide-react';
 export default function ThankYouPage() {
   return (
     <div className="min-h-screen bg-background font-sans text-text-dark selection:bg-accent selection:text-white">
-      <nav className="fixed left-1/2 top-6 z-50 flex w-[90%] max-w-5xl -translate-x-1/2 items-center justify-between rounded-full border border-text-dark/20 bg-background/90 px-6 py-3 shadow-md backdrop-blur-xl transition-all duration-300">
-        <div className="flex items-center gap-3">
-          <Link to="/">
-            <img
-              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
-              alt="Obskura Logo"
-              className="h-9 object-contain saturate-200"
-            />
-          </Link>
-          <Link to="/" className="text-xl font-bold tracking-tight">
-            Obskura
-          </Link>
-        </div>
-        <Link
-          to="/work-index"
-          className="hidden font-medium transition-colors hover:text-accent md:inline-flex"
-        >
-          Work Index
-        </Link>
-      </nav>
 
       <main className="relative isolate flex min-h-screen items-center overflow-hidden px-6 py-32 md:px-12 lg:px-24">
         <div className="absolute inset-0">
@@ -56,7 +36,7 @@ export default function ThankYouPage() {
             </p>
             <div className="space-y-4">
               {[
-                'We review the project details and goals.',
+                'We review your services, service area, and marketing goals.',
                 'We reply with the best next step, question, or call time.',
                 'If there is a fit, we map scope, timeline, and priorities.',
               ].map((item, index) => (

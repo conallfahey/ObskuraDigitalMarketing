@@ -822,31 +822,6 @@ export default function ProposalPage() {
       ref={containerRef}
       className="min-h-screen bg-background text-text-dark font-sans selection:bg-accent selection:text-white"
     >
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 w-[90%] max-w-6xl rounded-full bg-background/90 backdrop-blur-xl border border-text-dark/20 shadow-md transition-all duration-300">
-        <div className="flex items-center gap-3">
-          <Link to="/">
-            <img
-              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
-              alt="Obskura Logo"
-              className="h-9 object-contain saturate-200"
-            />
-          </Link>
-          <Link to="/" className="text-xl font-bold tracking-tight">
-            Obskura
-          </Link>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-text-dark">
-          <a href="#scope" className="hover-lift hover:text-accent transition-colors">
-            Scope
-          </a>
-          <a href="#plan" className="hover-lift hover:text-accent transition-colors">
-            Plan
-          </a>
-          <a href="#next-steps" className="hover-lift hover:text-accent transition-colors">
-            Next Steps
-          </a>
-        </div>
-      </nav>
 
       <section className="relative isolate min-h-[72dvh] md:min-h-[78dvh] overflow-hidden px-6 md:px-12 lg:px-24 pt-28 md:pt-30 pb-12 md:pb-14 flex items-start md:items-center border-b border-text-dark/10">
         <div className="absolute inset-0">

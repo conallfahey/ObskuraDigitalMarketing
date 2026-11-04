@@ -18,6 +18,11 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+  }
+
   body {
     @apply bg-background text-text-dark font-sans antialiased selection:bg-accent selection:text-white;
   }
@@ -52,6 +57,10 @@
 
 .hover-lift {
   @apply transition-transform duration-200 hover:-translate-y-[1px];
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 .home-hero-photo {

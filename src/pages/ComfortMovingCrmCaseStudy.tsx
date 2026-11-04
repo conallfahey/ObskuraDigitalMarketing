@@ -539,40 +539,6 @@ export default function ComfortMovingCrmCaseStudy() {
       ref={containerRef}
       className="min-h-screen bg-background font-sans text-text-dark selection:bg-accent selection:text-white"
     >
-      <nav className="fixed left-1/2 top-6 z-50 flex w-[90%] max-w-5xl -translate-x-1/2 items-center justify-between rounded-full border border-text-dark/20 bg-background/90 px-6 py-3 shadow-md backdrop-blur-xl transition-all duration-300">
-        <div className="flex items-center gap-3">
-          <Link to="/">
-            <img
-              src="/images/Obskura - Black Stroke SVG - NO BG.svg"
-              alt="Obskura Logo"
-              className="h-9 object-contain saturate-200"
-            />
-          </Link>
-          <Link to="/" className="text-xl font-bold tracking-tight">
-            Obskura
-          </Link>
-        </div>
-        <div className="hidden items-center gap-8 text-sm font-medium text-text-dark md:flex">
-          <Link to="/#services" className="hover-lift hover:text-accent transition-colors">
-            Services
-          </Link>
-          <Link to="/work-index" className="hover-lift hover:text-accent transition-colors">
-            Work Index
-          </Link>
-          <Link to="/#case-studies" className="hover-lift text-accent transition-colors">
-            Case Studies
-          </Link>
-        </div>
-        <Link
-          to="/#contact"
-          className="magnetic-btn group rounded-full bg-accent px-5 py-2 text-sm font-medium text-white"
-        >
-          <span className="relative z-10 flex items-center gap-2">
-            Contact <ArrowRight size={14} />
-          </span>
-          <span className="hover-bg bg-text-dark"></span>
-        </Link>
-      </nav>
 
       <section className="relative isolate overflow-hidden border-b border-text-dark/10 px-6 pb-20 pt-40 md:px-12 lg:px-24">
         <div className="absolute inset-0">
@@ -942,9 +908,6 @@ export default function ComfortMovingCrmCaseStudy() {
             <span className="text-lg font-bold">Obskura</span>
             <span className="text-[#E8E4DD]/40">© {new Date().getFullYear()}</span>
           </div>
-          <Link to="/work-index" className="transition-colors hover:text-accent">
-            Back to work index
-          </Link>
         </div>
       </footer>
     </div>
