@@ -47,49 +47,7 @@ const videoSchedule = [
   { day: 'S', task: 'Analyzing' },
 ];
 
-const caseStudyProofCards = [
-  {
-    metric: '16x',
-    label: 'ROAS',
-    detail: 'Meta ads performance in the first two months.',
-  },
-  {
-    metric: 'CRM',
-    label: 'Built Custom',
-    detail: 'Website, quote, and Meta leads unified into one pipeline.',
-  },
-  {
-    metric: 'SEO',
-    label: 'Local Search',
-    detail: 'Service and neighborhood pages structured for Chicago moving intent.',
-  },
-  {
-    metric: 'One',
-    label: 'Growth System',
-    detail: 'Creative, paid media, SEO, and follow-up connected together.',
-  },
-];
-
 const contactEmail = 'conall@obskuraagency.com';
-const investmentPackages = [
-  {
-    name: 'Foundation',
-    format: 'Project investment',
-    description: 'A clear website, service pages, and quote forms that help customers get in touch.',
-  },
-  {
-    name: 'Local Growth',
-    format: 'Monthly investment',
-    description: 'Local SEO, Google Business Profile support, and ongoing website improvements.',
-  },
-  {
-    name: 'Connected Marketing',
-    format: 'Monthly investment + setup',
-    description: 'Local Growth, plus paid ads, video content, and CRM follow-up working together.',
-  },
-];
-
-const monthlyPartnership = 'Monthly Partnership';
 const productionVideos = [
   { title: 'On the Job', file: 'umbrella-roofing-03.mp4', poster: 'umbrella-03-poster-selected.jpg' },
   { title: 'Client Story', file: 'umbrella-roofing-01.mp4', poster: 'umbrella-01-poster-selected.jpg' },
@@ -99,18 +57,7 @@ export default function App() {
   const containerRef = useRef<HTMLDivElement>(null);
   const rotatingWordRef = useRef<HTMLSpanElement>(null);
   const [activeWordIndex, setActiveWordIndex] = useState(0);
-  const [selectedInvestment, setSelectedInvestment] = useState('');
   const [selectedPartnership, setSelectedPartnership] = useState('');
-
-  function selectInvestment(name: string) {
-    setSelectedInvestment(name);
-    setSelectedPartnership('');
-  }
-
-  function selectPartnership(name: string) {
-    setSelectedInvestment(monthlyPartnership);
-    setSelectedPartnership(name);
-  }
 
   const contactRedirectUrl = `${window.location.origin}/thank-you`;
 
@@ -498,129 +445,50 @@ export default function App() {
         </div>
       </section>
 
-      <section id="case-studies" className="py-32 px-6 md:px-12 lg:px-24 bg-primary border-t border-text-dark/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-20">
-            <h2 className="text-4xl md:text-5xl font-sans font-bold tracking-tight mb-4 flex items-center gap-4">
-              <span className="text-accent">02 //</span> Proof With Teeth
-            </h2>
-            <p className="font-mono text-text-dark/60 max-w-xl">
-              See how we connected content, ads, local search, and follow-up for a Chicago moving company.
-            </p>
-          </div>
-
-          <div className="mb-10 grid grid-cols-1 border-y border-text-dark/20 sm:grid-cols-2 lg:grid-cols-4">
-            {caseStudyProofCards.map((card, index) => (
-              <div
-                key={card.label}
-                className={`py-5 ${index > 0 ? 'border-t border-text-dark/15' : ''} ${index % 2 === 1 ? 'sm:border-l sm:pl-6' : 'sm:pr-6'} ${index < 2 ? 'sm:border-t-0' : ''} ${index > 0 ? 'lg:border-l lg:border-t-0 lg:pl-6' : ''} lg:pr-6`}
-              >
-                <p className={`mb-2 leading-none tracking-tight ${index === 0 ? 'font-serif text-4xl italic text-accent md:text-5xl' : 'pt-1 font-sans text-3xl font-semibold text-text-dark md:pt-2 md:text-4xl'}`}>
-                  {card.metric}
-                </p>
-                <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-dark/55">
-                  {card.label}
-                </p>
-                <p className="max-w-[15rem] text-xs leading-relaxed text-text-dark/65">
-                  {card.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div className="w-full aspect-[4/3] rounded-3xl overflow-hidden relative shadow-2xl group">
+      <section id="case-studies" aria-labelledby="case-studies-heading" className="border-t border-text-dark/10 bg-primary px-6 py-24 md:px-12 lg:px-24">
+        <div className="mx-auto max-w-7xl">
+          <h2 id="case-studies-heading" className="mb-10 text-4xl font-bold tracking-tight md:text-5xl">
+            <span className="text-accent">02 //</span> Proven Success
+          </h2>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
               <img
-                src="images/ComfortMovingChicago.webp"
-                alt="Comfort Moving Chicago Case Study"
-                className="w-full h-full object-cover scale-150 grayscale transition-transform duration-1000 group-hover:scale-105"
+                src="/images/ComfortMovingChicago.webp"
+                alt="Comfort Moving Chicago crew carrying furniture at a storage facility"
+                width={1800}
+                height={1201}
+                loading="lazy"
+                className="aspect-[4/3] w-full rounded-3xl object-cover"
               />
-              <div className="absolute inset-0 bg-text-dark/40 group-hover:bg-text-dark/20 transition-colors duration-500"></div>
-              <div className="absolute top-6 right-6 font-mono text-xs px-4 py-2 bg-background text-text-dark rounded-full shadow-lg">
-                Featured Engagement
-              </div>
-            </div>
-
-            <div className="flex flex-col">
-              <h3 className="text-4xl font-serif italic mb-2">Comfort Moving Chicago</h3>
-              <p className="text-xl font-medium text-text-dark/70 border-b border-text-dark/10 pb-6 mb-8">
-                Connected ad creative creation, Meta ads management, custom CRM infrastructure,
-                and SEO into one growth system that delivered 16x ROAS in the first two months.
+              <h3 className="mt-6 font-serif text-3xl italic md:text-4xl">Comfort Moving Chicago</h3>
+              <p className="mt-4 max-w-lg text-lg leading-relaxed text-text-dark/75">
+                Word-of-mouth referrals and posting flyers weren’t enough, and there was no proper way to follow up on leads.
               </p>
-
-              <div className="mb-6">
-                <h4 className="font-mono text-sm tracking-widest text-text-dark/50 uppercase mb-3">
-                  The Problem
-                </h4>
-                <p className="font-medium">
-                  Word-of-mouth referrals and flyers created some momentum, but they were
-                  inconsistent and difficult to rely on while local search visibility and lead
-                  follow-up needed a stronger system.
-                </p>
-              </div>
-
-              <div className="mb-8">
-                <h4 className="font-mono text-sm tracking-widest text-text-dark/50 uppercase mb-3">
-                  Our Approach
-                </h4>
-                <ul className="space-y-2 font-medium">
-                  <li className="flex gap-3">
-                    <span className="text-accent">&rarr;</span> Rebuilt the website around local SEO,
-                    service-page intent, and cleaner conversion paths.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-accent">&rarr;</span> Structured neighborhood and service
-                    landing pages to capture high-intent Chicago moving searches.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-accent">&rarr;</span> Built a custom CRM and unified website,
-                    quote, and Meta ad leads into one pipeline.
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="text-accent">&rarr;</span> Created ad assets, managed Meta
-                    campaigns, and used CRM data to tighten follow-up.
-                  </li>
-                </ul>
-              </div>
-
-              <div className="p-6 bg-background rounded-2xl border border-text-dark/10 mb-8">
-                <h4 className="font-mono text-sm tracking-widest text-accent uppercase mb-4">
-                  The Outcome
-                </h4>
-                <ul className="space-y-4 font-mono text-sm">
-                  <li className="flex justify-between items-center border-b border-text-dark/10 pb-2">
-                    <span className="text-text-dark/60">Paid Media Performance</span>
-                    <span className="font-bold">16x ROAS</span>
-                  </li>
-                  <li className="flex justify-between items-center border-b border-text-dark/10 pb-2">
-                    <span className="text-text-dark/60">Lead Management</span>
-                    <span className="font-bold">Centralized workflow</span>
-                  </li>
-                  <li className="flex justify-between items-center">
-                    <span className="text-text-dark/60">Timeline</span>
-                    <span className="font-bold">Ongoing</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Link
-                  to="/case-studies/comfort-moving-chicago"
-                  className="magnetic-btn bg-text-dark text-background px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-fit"
-                >
-                  <span className="relative z-10">See the full case study</span>
-                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">&rarr;</span>
-                  <span className="hover-bg bg-accent"></span>
-                </Link>
-                <Link
-                  to="/case-studies/comfort-moving-crm"
-                  className="magnetic-btn bg-background text-text-dark border border-text-dark/10 px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-fit"
-                >
-                  <span className="relative z-10">View the CRM app</span>
-                  <span className="relative z-10 group-hover:translate-x-1 transition-transform">&rarr;</span>
-                  <span className="hover-bg bg-primary"></span>
-                </Link>
-              </div>
+            </div>
+            <div>
+              <p className="mb-3 text-xl font-semibold">What we connected</p>
+              <ul className="list-disc space-y-2 pl-5 text-lg text-text-dark/75">
+                <li>Ad creative creation</li>
+                <li>Meta ads management</li>
+                <li>Custom CRM infrastructure</li>
+                <li>SEO</li>
+              </ul>
+              <p className="my-7 border-y border-text-dark/15 py-6 text-2xl font-semibold leading-snug md:text-3xl">
+                <span className="text-accent">16x return on ad spend</span> in the first two months.
+              </p>
+              <ul className="space-y-4 leading-relaxed text-text-dark/75">
+                {[
+                  'Rebuilt the website so customers could find the right service and request a quote more easily.',
+                  'Created service and neighborhood pages to reach people searching for movers in Chicago.',
+                  'Built a custom CRM to keep website inquiries, quote requests, and Meta ad leads in one place.',
+                  'Created ads, managed Meta campaigns, and used the CRM to help the team follow up on leads.',
+                ].map(item => (
+                  <li key={item} className="flex gap-3"><span aria-hidden="true" className="text-accent">→</span><span>{item}</span></li>
+                ))}
+              </ul>
+              <Link to="/case-studies/comfort-moving-chicago" className="mt-8 inline-flex items-center gap-3 rounded-full bg-text-dark px-7 py-4 font-bold text-background transition-colors hover:bg-accent">
+                See the full case study <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -716,7 +584,7 @@ export default function App() {
         </div>
       </section>
 
-      <MonthlyPartnerships onSelect={selectPartnership} />
+      <MonthlyPartnerships onSelect={setSelectedPartnership} />
 
       <FAQ />
 
@@ -731,7 +599,7 @@ export default function App() {
             </h2>
             <p className="text-lg font-medium leading-relaxed text-text-dark/72">
               Tell us what services you offer, where you work, and what you want to improve.
-              We will reply with a clear next step.
+              Choose a monthly partnership or let us help you find the right fit. We will reply with a clear next step.
             </p>
             <a
               href={`mailto:${contactEmail}`}
@@ -752,31 +620,13 @@ export default function App() {
             <input type="hidden" name="_next" value={contactRedirectUrl} />
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <label className="block md:col-span-2">
-                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Investment package</span>
-                <select name="investment_package" value={selectedInvestment} onChange={event => selectInvestment(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
-                  <option value="">Help me choose / custom scope</option>
-                  {investmentPackages.map(plan => <option key={plan.name} value={plan.name}>{plan.name}</option>)}
-                  <option className="font-bold text-accent" value={monthlyPartnership}>{monthlyPartnership}</option>
+                <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Monthly partnership</span>
+                <select name="monthly_partnership" required value={selectedPartnership} onChange={event => setSelectedPartnership(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
+                  <option value="" disabled>Select a monthly partnership</option>
+                  {partnershipNames.map(name => <option key={name} value={name}>{name}</option>)}
+                  <option value="Help me choose">Help me choose</option>
                 </select>
               </label>
-              {selectedInvestment !== monthlyPartnership && (
-                <button
-                  type="button"
-                  onClick={() => selectInvestment(monthlyPartnership)}
-                  className="-mt-2 w-fit text-left text-sm font-bold text-accent underline decoration-2 underline-offset-4 hover:text-text-dark md:col-span-2"
-                >
-                  Choose Monthly Partnership
-                </button>
-              )}
-              {selectedInvestment === monthlyPartnership && (
-                <label className="block md:col-span-2">
-                  <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">Monthly partnership</span>
-                  <select name="monthly_partnership" required value={selectedPartnership} onChange={event => setSelectedPartnership(event.target.value)} className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent">
-                    <option value="">Select a monthly partnership</option>
-                    {partnershipNames.map(name => <option key={name} value={name}>{name}</option>)}
-                  </select>
-                </label>
-              )}
               <label className="block">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
                   Name
@@ -810,26 +660,15 @@ export default function App() {
                   placeholder="Business name"
                 />
               </label>
-              <label className={selectedInvestment === monthlyPartnership ? 'hidden' : 'block'}>
+              <label className="block">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">
-                  Project Type
+                  Service area
                 </span>
-                <select
-                  name="project_type"
-                  disabled={selectedInvestment === monthlyPartnership}
+                <input
+                  name="service_area"
                   className="w-full rounded-xl border border-text-dark/10 bg-background px-4 py-3 font-medium outline-none transition-colors focus:border-accent"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select one
-                  </option>
-                  <option>Website</option>
-                  <option>Paid ads</option>
-                  <option>SEO</option>
-                  <option>Video or content</option>
-                  <option>CRM or automation</option>
-                  <option>Not sure yet</option>
-                </select>
+                  placeholder="Cities or regions you serve"
+                />
               </label>
               <label className="block md:col-span-2">
                 <span className="mb-2 block font-mono text-xs uppercase tracking-[0.18em] text-text-dark/50">

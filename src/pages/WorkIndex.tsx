@@ -29,7 +29,7 @@ const featuredWork: (ViewerItem & { scope: string; summary: string })[] = [
     type: 'App',
     scope: 'CRM / Pipeline / Automation',
     image: '/images/Screenshot 2026-07-29 154825.png',
-    caseStudyUrl: '/case-studies/comfort-moving-crm',
+    caseStudyUrl: '/case-studies/comfort-moving-chicago#crm',
     summary:
       'A custom operating view that keeps inbound leads, follow-up, quote status, and campaign attribution in one place.',
   },

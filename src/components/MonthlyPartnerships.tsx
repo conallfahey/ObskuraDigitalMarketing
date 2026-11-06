@@ -15,9 +15,7 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
           <article className="flex flex-col rounded-3xl border border-text-dark/15 p-6 sm:p-8">
             <div className="mb-3 font-mono text-xs uppercase tracking-widest text-text-dark/65">01 / Foundation
             </div>
-            <h3 className="text-xl font-bold">Market Foundation</h3>
-            <div className="my-4 text-4xl font-bold tracking-tight text-accent">$15K <small className="text-sm font-medium text-text-dark/70">/ month</small>
-            </div>
+            <h3 className="mb-4 text-xl font-bold">Market Foundation</h3>
             <p>A consistent presence.<br />A focused marketing plan.</p>
             <ul className="my-5 list-disc space-y-2 pl-5 text-sm leading-relaxed">
               <li><strong>2 filming days</strong> / month</li>
@@ -33,9 +31,7 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
           <article className="flex flex-col rounded-3xl border border-text-dark/15 p-6 sm:p-8 border-accent/60 bg-primary">
             <div className="mb-3 font-mono text-xs uppercase tracking-widest text-text-dark/65">02 / Growth
             </div>
-            <h3 className="text-xl font-bold">Market Growth</h3>
-            <div className="my-4 text-4xl font-bold tracking-tight text-accent">$30K <small className="text-sm font-medium text-text-dark/70">/ month</small>
-            </div>
+            <h3 className="mb-4 text-xl font-bold">Market Growth</h3>
             <p>More campaign capacity.<br />More room to test and improve.</p>
             <ul className="my-5 list-disc space-y-2 pl-5 text-sm leading-relaxed">
               <li><strong>4 filming days</strong> / month</li>
@@ -51,10 +47,8 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
           <article className="flex flex-col rounded-3xl border border-text-dark/15 p-6 sm:p-8">
             <div className="mb-3 font-mono text-xs uppercase tracking-widest text-text-dark/65">03 / Custom
             </div>
-            <h3 className="text-xl font-bold">Custom Partnership</h3>
-            <div className="my-4 text-4xl font-bold tracking-tight text-accent">$75K+ <small className="text-sm font-medium text-text-dark/70">/ month</small>
-            </div>
-            <p>Custom plans starting at $75K/month.<br />Built around your business needs.</p>
+            <h3 className="mb-4 text-xl font-bold">Custom Partnership</h3>
+            <p>A custom marketing plan.<br />Built around your business needs.</p>
             <ul className="my-5 list-disc space-y-2 pl-5 text-sm leading-relaxed">
               <li><strong>10 filming days</strong> / month</li>
               <li><strong>16 short-form videos</strong> / month</li>
@@ -84,7 +78,7 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
           <div className="overflow-x-auto border-t border-text-dark/10 px-3 pb-5 pt-3 sm:px-5">
             <table className="w-full min-w-[42rem] border-collapse text-left text-sm [&_td]:border-t [&_td]:border-text-dark/10 [&_td]:p-3 [&_th]:p-3">
               <thead>
-                <tr><th>Monthly capacity</th><th>Foundation / $15K</th><th>Growth / $30K</th><th>Custom / $75K+</th></tr>
+                <tr><th>Monthly capacity</th><th>Foundation</th><th>Growth</th><th>Custom</th></tr>
               </thead>
               <tbody>
                 <tr><td>Filming days</td><td>2</td><td>4</td><td>10</td></tr>
@@ -105,7 +99,7 @@ export default function MonthlyPartnerships({ onSelect }: { onSelect: (name: str
             <Plus aria-hidden="true" className="h-5 w-5 shrink-0 text-accent transition-transform group-open:rotate-45" />
           </summary>
           <div className="space-y-4 border-t border-text-dark/10 px-6 py-6 text-sm leading-relaxed text-text-dark/70 sm:px-8">
-          <p>All retainers include creative planning, production, social management, paid advertising management, and local SEO. Website and search work is prioritized around your actual needs; the proposal defines the implementation workload. Custom partnerships start at $75K/month, with final pricing tailored to your agreed campaign and production needs.</p>
+          <p>All retainers include creative planning, production, social management, paid advertising management, and local SEO. Website and search work is prioritized around your actual needs; the proposal defines the implementation workload.</p>
           <p>Proposed initial term: 6 months, then monthly with 30 days’ notice. One company or branch and one website form the starting scope, with geography and production logistics agreed together. Additional branches and markets are quoted separately. Media spend, travel outside the agreed production area, CRM/call-tracking subscriptions, full website rebuilds, and specialist production costs are additional.</p>
           <p>Two consolidated revision rounds per asset. Monthly allowances do not roll over. Short-form content is part of the included video count; cross-posts do not increase the count. Ad variations may reuse footage with different hooks, offers, or calls to action. Final availability and scope are confirmed in the signed agreement.</p>
           </div>

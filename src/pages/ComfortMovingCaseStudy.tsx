@@ -1,546 +1,137 @@
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
-import { Database, MapPinned, Megaphone, ArrowRight } from 'lucide-react';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const systemCards = [
+const screenshots = [
   {
-    title: 'SEO Foundation',
-    label: 'SEO',
-    image: '/images/ComfortMovingWebsite.png',
-    description:
-      'Service pages, neighborhood landing pages, and local search signals were structured around how Chicago moving customers actually search.',
+    title: 'One view of the working day',
+    file: '154518', width: 2350, height: 1516,
+    alt: 'Comfort Moving CRM dashboard showing recent leads, next moves, and completed jobs',
+    caption: 'Recent inquiries, upcoming moves, and review follow-ups give the team a clear starting point each day.',
   },
   {
-    title: 'Custom CRM Workflow',
-    label: 'CRM',
-    image: '/images/Screenshot 2026-07-29 154518.png',
-    description:
-      'A moving-company-specific backend organized lead intake, payments, contracts, review follow-ups, and client progress in one place.',
+    title: 'Every inquiry has a next step',
+    file: '154541', width: 2356, height: 1522,
+    alt: 'Comfort Moving lead inbox with lead statuses, signed contracts, and move dates',
+    caption: 'The inbox brings contact details, lead sources, quote progress, contract status, and move dates together.',
   },
   {
-    title: 'Ad Creative and Meta Ads',
-    label: 'Meta',
-    image: '/images/ComfortMovingChicago.webp',
-    description:
-      'Photo, video, and influencer-driven assets were created, tested, and managed inside Meta campaigns built to convert attention into booked moves.',
-  },
-];
-
-const executionTimeline = [
-  {
-    phase: 'Phase 1',
-    title: 'Reframed the acquisition problem',
-    body:
-      'The engagement started with a clear objective: move beyond inconsistent word-of-mouth referrals and flyers by building a direct-response engine the company could measure and control.',
-  },
-  {
-    phase: 'Phase 2',
-    title: 'Rebuilt the website around intent',
-    body:
-      'We reorganized service and location pages around local SEO structure, cleaner internal linking, and shorter conversion paths for quote-ready visitors.',
-  },
-  {
-    phase: 'Phase 3',
-    title: 'Connected demand to operations',
-    body:
-      'A custom CRM was built to capture website forms, quote requests, Meta ad responses, and client progress inside one workflow so follow-up stayed fast.',
-  },
-  {
-    phase: 'Phase 4',
-    title: 'Scaled Meta ads with usable data',
-    body:
-      'With ad creative, Meta ads management, and backend infrastructure in place, qualified inbound demand could flow directly into the company pipeline with less lead leakage.',
+    title: 'See where demand comes from',
+    file: '154825', width: 2521, height: 1594,
+    alt: 'Comfort Moving analytics showing lead and booking trends, referral sources, and pipeline statuses',
+    caption: 'Lead and booking trends sit alongside referral sources and pipeline status, connecting marketing activity to the sales workflow.',
   },
 ];
 
 export default function ComfortMovingCaseStudy() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeTimelineIndex, setActiveTimelineIndex] = useState(0);
+  const { hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const ctx = gsap.context(() => {
-      gsap.from('.case-hero-content > *', {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: 'power3.out',
-        delay: 0.1,
-      });
-
-      gsap.from('.timeline-item', {
-        scrollTrigger: {
-          trigger: '.timeline-container',
-          start: 'top 70%',
-        },
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out',
-      });
-
-      gsap.from('.system-card', {
-        scrollTrigger: {
-          trigger: '.system-grid',
-          start: 'top 75%',
-        },
-        y: 32,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: 'power3.out',
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    const updateActiveTimelineItem = () => {
-      const markers = Array.from(
-        containerRef.current?.querySelectorAll<HTMLElement>('[data-timeline-marker]') ?? []
-      );
-
-      if (markers.length === 0) {
-        return;
-      }
-
-      const activationLine = window.innerHeight * 0.48;
-      let closestIndex = 0;
-      let closestDistance = Number.POSITIVE_INFINITY;
-
-      markers.forEach((marker, index) => {
-        const markerRect = marker.getBoundingClientRect();
-        const markerCenter = markerRect.top + markerRect.height / 2;
-        const distance = Math.abs(markerCenter - activationLine);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
-        }
-      });
-
-      setActiveTimelineIndex(closestIndex);
-    };
-
-    let animationFrame = 0;
-    const scheduleUpdate = () => {
-      window.cancelAnimationFrame(animationFrame);
-      animationFrame = window.requestAnimationFrame(updateActiveTimelineItem);
-    };
-
-    updateActiveTimelineItem();
-    window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-    ScrollTrigger.addEventListener('refresh', scheduleUpdate);
-
-    return () => {
-      window.cancelAnimationFrame(animationFrame);
-      window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
-      ScrollTrigger.removeEventListener('refresh', scheduleUpdate);
-    };
-  }, []);
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start' });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [hash]);
 
   return (
-    <div
-      ref={containerRef}
-      className="bg-background min-h-screen font-sans selection:bg-accent selection:text-white"
-    >
-
-      <section className="relative isolate overflow-hidden pt-40 pb-20 px-6 md:px-12 lg:px-24 border-b border-text-dark/10">
-        <div className="absolute inset-0">
-          <img
-            src="/images/ChicagoSkylineNorthside.png"
-            alt="Chicago skyline from the north side"
-            className="h-full w-full object-cover object-center grayscale-[10%] contrast-110 opacity-55"
-          />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(230,59,46,0.12),transparent_44%),linear-gradient(180deg,rgba(245,243,238,0.28),rgba(245,243,238,0.84))]"></div>
-        </div>
-
-        <div className="relative max-w-6xl mx-auto">
-          <div className="case-hero-content grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-end">
-            <div>
-              <span className="mb-6 inline-flex rounded-full border border-text-dark/10 bg-background/92 px-4 py-2 font-mono text-xs tracking-widest text-accent uppercase shadow-sm backdrop-blur-sm">
-                Case Study // Local Services
-              </span>
-              <h1 className="text-5xl md:text-7xl font-serif italic leading-[0.95] mb-6">
-                Comfort Moving Chicago
-              </h1>
-              <p className="text-xl md:text-2xl font-medium text-text-dark/80 max-w-3xl leading-relaxed">
-                Connected ad creative creation, Meta ads management, custom CRM infrastructure,
-                and SEO into one growth system that delivered 16x ROAS in the first campaign.
-              </p>
+    <div className="min-h-screen bg-background text-text-dark">
+      <main>
+        <header className="px-6 pb-14 pt-36 md:px-12 md:pt-44 lg:px-24">
+          <div className="mx-auto max-w-6xl">
+            <Link to="/#case-studies" className="text-sm font-semibold text-text-dark/60 hover:text-accent">← Back to work</Link>
+            <p className="mb-5 mt-10 font-mono text-xs uppercase tracking-[0.24em] text-accent">Case study / Comfort Moving Chicago</p>
+            <h1 className="max-w-4xl font-serif text-5xl italic leading-[1.02] tracking-tight md:text-7xl">From first click to booked move.</h1>
+            <p className="mt-6 max-w-3xl text-xl leading-relaxed text-text-dark/75">Local SEO, campaign creative, Meta ads, and a custom CRM connected in one workflow for a Chicago moving company.</p>
+            <div className="mt-10 grid gap-6 rounded-3xl bg-text-dark p-7 text-background sm:grid-cols-3 md:p-9">
+              <div><p className="text-5xl font-bold text-accent">16x</p><p className="mt-2 text-sm text-background/75">Meta return on ad spend</p></div>
+              <div><p className="text-3xl font-bold">2 months</p><p className="mt-2 text-sm text-background/75">First campaign result</p></div>
+              <div><p className="text-3xl font-bold">One workflow</p><p className="mt-2 text-sm text-background/75">Inquiry through completed move</p></div>
             </div>
+          </div>
+        </header>
 
-            <div className="rounded-[2rem] border border-text-dark/10 bg-background/85 backdrop-blur-md p-6 md:p-8 shadow-xl">
-              <p className="font-mono text-xs tracking-[0.24em] uppercase text-text-dark/45 mb-5">
-                Engagement Snapshot
-              </p>
-              <p className="text-lg text-text-dark/75 leading-relaxed mb-6">
-                We do not sell vague growth promises. We build local search systems,
-                high-conversion websites, paid acquisition pipelines, and backend
-                infrastructure that turn demand into booked jobs.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-2xl bg-primary border border-text-dark/10 p-4">
-                  <span className="font-mono text-xs text-text-dark/50 uppercase block mb-1">
-                    Primary Goal
-                  </span>
-                  <span className="font-semibold leading-snug">
-                    Build reliable acquisition
-                  </span>
-                </div>
-                <div className="rounded-2xl bg-primary border border-text-dark/10 p-4">
-                  <span className="font-mono text-xs text-text-dark/50 uppercase block mb-1">
-                    Early Result
-                  </span>
-                  <span className="font-semibold leading-snug">16x ROAS in two months</span>
-                </div>
-              </div>
-              <div className="mt-6 grid grid-cols-2 gap-3">
-                <div className="overflow-hidden rounded-2xl border border-text-dark/10 bg-primary">
-                  <img
-                    src="/images/ComfortMovingWebsite.png"
-                    alt="Comfort Moving website screenshot"
-                    className="h-32 w-full object-cover object-top"
-                  />
-                </div>
-                <div className="overflow-hidden rounded-2xl border border-text-dark/10 bg-primary">
-                  <img
-                    src="/images/Screenshot 2026-07-29 154518.png"
-                    alt="Comfort Moving CRM dashboard"
-                    className="h-32 w-full object-cover object-top"
-                  />
-                </div>
+        <section className="px-6 py-12 md:px-12 lg:px-24" aria-labelledby="challenge-heading">
+          <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
+            <h2 id="challenge-heading" className="text-3xl font-bold tracking-tight">The challenge</h2>
+            <div className="space-y-4 text-lg leading-relaxed text-text-dark/75">
+              <p>Comfort Moving Chicago needed a more reliable source of booked jobs than word of mouth and flyers. Generating demand was only half the problem: inquiries, quotes, contracts, and follow-ups also needed a clear path through the business.</p>
+              <p>We connected acquisition and operations so the team could attract local customers, respond to inquiries, and manage the move without losing context between tools.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-text-dark/10 bg-primary px-6 py-14 md:px-12 lg:px-24" aria-labelledby="marketing-heading">
+          <div className="mx-auto max-w-6xl">
+            <h2 id="marketing-heading" className="mb-8 text-3xl font-bold tracking-tight">A website built for local searches.</h2>
+            <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+              <a href="/images/ComfortMovingWebsite.png" target="_blank" rel="noreferrer" className="block overflow-hidden rounded-2xl border border-text-dark/10 bg-background focus-visible:outline-2 focus-visible:outline-accent" aria-label="Open Comfort Moving website screenshot in a new tab">
+                <img src="/images/ComfortMovingWebsite.png" alt="Comfort Moving Chicago website design" width={2353} height={1351} loading="lazy" className="h-auto w-full" />
+              </a>
+              <div className="space-y-7">
+                <div><h3 className="mb-2 text-xl font-bold">Website & local SEO</h3><p className="leading-relaxed text-text-dark/75">Service and neighborhood pages were organized around how Chicago customers search. Clear quote forms shortened the path from local search to an inquiry, with website leads flowing into the CRM.</p></div>
+                <div><h3 className="mb-2 text-xl font-bold">A practical handoff</h3><p className="leading-relaxed text-text-dark/75">Lead source, move details, and customer history stayed together so the team could pick up the conversation without rebuilding it from scattered messages.</p></div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="px-6 md:px-12 lg:px-24 py-12 border-b border-text-dark/10">
-        <div className="max-w-6xl mx-auto">
-          <div className="rounded-[2rem] border border-text-dark/10 bg-background p-6 md:p-8 shadow-sm">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.8fr_1.4fr_1fr] lg:divide-x lg:divide-text-dark/10">
-              <div className="lg:pr-8">
-                <p className="font-mono text-xs tracking-[0.24em] text-text-dark/45 uppercase mb-3">
-                  Client
-                </p>
-                <p className="text-2xl font-bold tracking-tight">Comfort Moving Chicago</p>
-                <p className="mt-2 text-text-dark/60">Local services growth system</p>
-              </div>
-
-              <div className="lg:px-8">
-                <p className="font-mono text-xs tracking-[0.24em] text-text-dark/45 uppercase mb-4">
-                  Scope
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {[
-    'SEO',
-    'Website conversion',
-    'Ad creative',
-    'Meta ads',
-    'Influencer partnerships',
-    'Custom CRM',
-    'Automation',
-  ].map((item) => (
-                    <span
-                      key={item}
-                      className="rounded-full border border-text-dark/10 bg-primary px-4 py-2 text-sm font-semibold text-text-dark/78"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="lg:pl-8">
-                <p className="font-mono text-xs tracking-[0.24em] text-accent uppercase mb-4">
-                  Highlights
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-dark/45">
-                      Paid Media
-                    </p>
-                    <p className="text-2xl font-bold">16x ROAS</p>
-                  </div>
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-dark/45">
-                      Pipeline
-                    </p>
-                    <p className="text-lg font-bold">Centralized CRM</p>
-                  </div>
-                  <div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-text-dark/45">
-                      Timeline
-                    </p>
-                    <p className="text-lg font-bold">2 months</p>
-                  </div>
-                </div>
+        <section id="content-paid-ads" className="scroll-mt-28 px-6 py-14 md:px-12 lg:px-24" aria-labelledby="content-paid-ads-heading">
+          <div className="mx-auto max-w-6xl">
+            <p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-accent">Content & paid ads</p>
+            <div className="mb-8 grid gap-6 md:grid-cols-[1fr_1fr] md:items-end md:gap-12">
+              <h2 id="content-paid-ads-heading" className="text-3xl font-bold tracking-tight md:text-4xl">Show the work.<br />Reach the next customer.</h2>
+              <p className="text-lg leading-relaxed text-text-dark/75">We created photo and video assets around Comfort Moving’s team and service, then paired that content with managed Meta campaigns to turn attention into moving inquiries.</p>
+            </div>
+            <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-center">
+              <figure className="overflow-hidden rounded-2xl border border-text-dark/10 bg-primary">
+                <img src="/images/ComfortMovingChicago.webp" alt="Comfort Moving Chicago crew carrying wrapped furniture through a storage facility" width={1800} height={1201} loading="lazy" className="h-auto w-full" />
+                <figcaption className="px-5 py-4 text-sm text-text-dark/65">On-location content featuring the people behind the move.</figcaption>
+              </figure>
+              <div className="space-y-6">
+                <div><h3 className="mb-2 text-xl font-bold">Content with a clear purpose</h3><p className="leading-relaxed text-text-dark/75">Photo, video, and influencer partnerships gave the brand a library of creative for paid and organic channels, showing customers the service before they requested a quote.</p></div>
+                <div><h3 className="mb-2 text-xl font-bold">Meta campaigns & follow-up</h3><p className="leading-relaxed text-text-dark/75">We tested creative and managed campaigns while connecting Meta leads to the CRM. New inquiries entered the same pipeline as website requests, keeping campaign activity tied to the team’s follow-up.</p></div>
+                <div className="flex items-center gap-5 border-t border-text-dark/15 pt-6"><p className="text-5xl font-bold tracking-tight text-accent">16x</p><p className="max-w-56 text-sm leading-relaxed text-text-dark/70">Return on Meta ad spend in the first two months.</p></div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="py-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto flex flex-col gap-14">
-            <div>
-              <h2 className="text-3xl font-bold mb-5 flex items-center gap-3">
-                <span className="text-accent text-xl">01</span> The Problem
-              </h2>
-              <p className="text-lg text-text-dark/80 leading-relaxed mb-4">
-                Comfort Moving needed more than a prettier website. The company had to create a
-                dependable inbound system in one of Chicago&apos;s most competitive service
-                categories, where weak local visibility and inconsistent offline acquisition made
-                growth harder to forecast.
-              </p>
-              <p className="text-lg text-text-dark/72 leading-relaxed">
-                Word-of-mouth referrals and flyers had value, but they were inconsistent and could
-                not be relied on as the company scaled. The issue was not demand. The issue was
-                building the infrastructure to attract, capture, follow up with, and convert that
-                demand predictably.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-5 flex items-center gap-3">
-                <span className="text-accent text-xl">02</span> Our Approach
-              </h2>
-              <p className="text-lg text-text-dark/80 leading-relaxed mb-6">
-                Instead of chasing isolated tactics, we treated Comfort Moving like an operating
-                system. The website, local search footprint, CRM, content production, and paid
-                media all had to work as one connected growth engine.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-2xl border border-text-dark/10 bg-background p-5">
-                  <MapPinned className="text-accent mb-4" size={22} />
-                  <p className="font-semibold mb-2">Local search capture</p>
-                  <p className="text-text-dark/70">
-                    Rebuilt service and neighborhood landing pages to match high-intent Chicago
-                    moving searches.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-text-dark/10 bg-background p-5">
-                  <Database className="text-accent mb-4" size={22} />
-                  <p className="font-semibold mb-2">Custom CRM infrastructure</p>
-                  <p className="text-text-dark/70">
-                    Built a backend tailored for a local moving company to track leads, quotes,
-                    Meta responses, and client progress.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-text-dark/10 bg-background p-5 sm:col-span-2">
-                  <Megaphone className="text-accent mb-4" size={22} />
-                  <p className="font-semibold mb-2">Creative plus paid acquisition</p>
-                  <p className="text-text-dark/70">
-                    Produced video and photo assets for paid social, launched Meta campaigns, and
-                    unified website inquiries, quote requests, and ad responses into one follow-up
-                    workflow.
-                  </p>
-                </div>
+        <section id="crm" className="scroll-mt-28 px-6 py-14 md:px-12 lg:px-24" aria-labelledby="crm-heading">
+          <div className="mx-auto max-w-6xl">
+            <div className="mb-9 grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
+              <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-accent">Inside the CRM</p><h2 id="crm-heading" className="text-3xl font-bold tracking-tight">Built around the move.</h2></div>
+              <div className="space-y-4 text-lg leading-relaxed text-text-dark/75">
+                <p>A custom React and Firebase application brings lead intake, quotes, bookings, contracts, payments, and follow-ups into one place. Staff work with move dates, routes, crew sizes, and deposits—the details they need to run a moving business.</p>
+                <p>Each lead keeps its notes and activity history. Signed contracts, payment requests, upcoming jobs, and review reminders stay connected as the customer moves from inquiry to completion.</p>
               </div>
             </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                <span className="text-accent text-xl">03</span> System Buildout
-              </h2>
-              <p className="text-lg text-text-dark/72 leading-relaxed mb-8 max-w-3xl">
-                The work centered on four connected services: SEO created durable local visibility,
-                ad creative gave the brand trust-building assets, influencer partnerships helped
-                multiply reach, Meta ads generated immediate demand, and the CRM made sure every
-                inquiry had a place to go.
-              </p>
-              <div className="system-grid grid grid-cols-1 lg:grid-cols-3 gap-6">
-                {systemCards.map((card) => (
-                  <article
-                    key={card.title}
-                    className="system-card overflow-hidden rounded-[1.75rem] border border-text-dark/10 bg-primary shadow-sm"
-                  >
-                    <div className="relative aspect-[5/4] overflow-hidden">
-                      <img
-                        src={card.image}
-                        alt={card.title}
-                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-text-dark/60 via-text-dark/10 to-transparent"></div>
-                      <span className="absolute left-4 top-4 rounded-full bg-background/90 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-text-dark">
-                        {card.label}
-                      </span>
-                    </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold mb-3">{card.title}</h3>
-                      <p className="text-text-dark/72 leading-relaxed">{card.description}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-5 flex items-center gap-3">
-                <span className="text-accent text-xl">04</span> CRM Built to Scale
-              </h2>
-              <p className="text-lg text-text-dark/80 leading-relaxed mb-6">
-                Comfort Moving needed more than a place to store leads. The CRM was built as an
-                operating layer for the business: flexible enough to support current workflows and
-                structured enough to scale as lead volume, crews, and service areas expanded.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="rounded-2xl border border-text-dark/10 bg-primary p-5">
-                  <p className="font-semibold mb-2">Lead and web form intake</p>
-                  <p className="text-text-dark/70">
-                    Website forms, quote requests, and Meta ad leads were routed into one
-                    manageable pipeline for faster response.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-text-dark/10 bg-primary p-5">
-                  <p className="font-semibold mb-2">Automated review requests</p>
-                  <p className="text-text-dark/70">
-                    Post-job follow-ups helped turn completed moves into new trust signals for
-                    search, ads, and future customers.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-text-dark/10 bg-primary p-5">
-                  <p className="font-semibold mb-2">Payments and contracts</p>
-                  <p className="text-text-dark/70">
-                    Payment processing and contract handling were brought into the workflow so
-                    admin steps stayed connected to each customer record.
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-text-dark/10 bg-primary p-5">
-                  <p className="font-semibold mb-2">Visualized analytics</p>
-                  <p className="text-text-dark/70">
-                    Pipeline data, lead sources, and performance insights were made easier to read
-                    so the team could see what was driving booked jobs.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="timeline-container">
-              <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
-                <span className="text-accent text-xl">05</span> Execution Timeline
-              </h2>
-
-              <div className="relative space-y-8 before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:-translate-x-px before:bg-gradient-to-b before:from-transparent before:via-text-dark/20 before:to-transparent md:before:left-1/2">
-                {executionTimeline.map((item, index) => (
-                  <div
-                    key={item.title}
-                    className="timeline-item relative grid grid-cols-[2rem_1fr] gap-6 md:grid-cols-[minmax(0,1fr)_2rem_minmax(0,1fr)] md:gap-8"
-                  >
-                    <div
-                      data-timeline-marker
-                      className={`z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 bg-background shadow transition-colors duration-300 md:col-start-2 md:row-start-1 ${
-                        activeTimelineIndex === index ? 'border-accent' : 'border-text-dark/30'
-                      }`}
-                    >
-                      <div
-                        className={`h-2 w-2 rounded-full transition-colors duration-300 ${
-                          activeTimelineIndex === index ? 'bg-accent' : 'bg-transparent'
-                        }`}
-                      ></div>
-                    </div>
-                    <div
-                      className={`rounded-2xl border border-text-dark/10 bg-primary p-6 shadow-sm md:row-start-1 ${
-                        index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-3'
-                      }`}
-                    >
-                      <span className="font-mono text-xs text-text-dark/50 mb-2 block">
-                        {item.phase}
-                      </span>
-                      <h4 className="font-bold text-xl mb-2">{item.title}</h4>
-                      <p className="text-text-dark/70 text-sm leading-relaxed">{item.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h2 className="text-3xl font-bold mb-5 flex items-center gap-3">
-                <span className="text-accent text-xl">06</span> The Outcome
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div className="rounded-3xl bg-text-dark text-background p-7">
-                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-background/45 mb-3">
-                    Local Search Foundation
-                  </p>
-                  <p className="text-lg text-background/85 leading-relaxed">
-                    A stronger organic footprint across Chicago service and neighborhood intent.
-                  </p>
-                </div>
-                <div className="rounded-3xl bg-primary border border-text-dark/10 p-7">
-                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-text-dark/45 mb-3">
-                    Paid Media Performance
-                  </p>
-                  <p className="text-lg text-text-dark/80 leading-relaxed">
-                    Meta ads produced 16x ROAS within the first two months.
-                  </p>
-                </div>
-                <div className="rounded-3xl bg-primary border border-text-dark/10 p-7">
-                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-text-dark/45 mb-3">
-                    Expanded Reach
-                  </p>
-                  <p className="text-lg text-text-dark/80 leading-relaxed">
-                    Influencer partnerships helped multiply creative reach and gave paid campaigns
-                    more trust-building content to amplify.
-                  </p>
-                </div>
-                <div className="rounded-3xl bg-primary border border-text-dark/10 p-7">
-                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-text-dark/45 mb-3">
-                    Conversion Infrastructure
-                  </p>
-                  <p className="text-lg text-text-dark/80 leading-relaxed">
-                    Faster follow-up and a smoother path from inquiry to booked move through one
-                    centralized backend workflow.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-8 bg-text-dark text-background rounded-3xl mt-2">
-              <h2 className="text-2xl font-bold mb-4">System Synthesis</h2>
-              <p className="text-lg text-background/80 leading-relaxed mb-8">
-                This was not a one-channel campaign. Ad creative creation, Meta ads management,
-                influencer partnerships, custom CRM infrastructure, and SEO worked together to make
-                demand easier to generate, capture, track, and convert.
-              </p>
-              <Link
-                to="/#contact"
-                className="magnetic-btn bg-accent text-white px-8 py-4 rounded-full font-bold inline-flex justify-center items-center gap-3 group w-full sm:w-auto"
-              >
-                <span className="relative z-10">Book a strategy call</span>
-                <ArrowRight className="relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
-                <span className="hover-bg bg-background"></span>
-              </Link>
+            <div className="space-y-8">
+              {screenshots.map(screenshot => (
+                <figure key={screenshot.file} className="overflow-hidden rounded-2xl border border-text-dark/10 bg-primary">
+                  <figcaption className="px-5 py-5 md:px-7">
+                    <h3 className="text-xl font-bold">{screenshot.title}</h3>
+                    <p className="mt-2 max-w-3xl leading-relaxed text-text-dark/70">{screenshot.caption}</p>
+                  </figcaption>
+                  <a href={`/images/Screenshot 2026-07-29 ${screenshot.file}.png`} target="_blank" rel="noreferrer" className="block border-t border-text-dark/10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-accent" aria-label={`Open screenshot: ${screenshot.title} (new tab)`}>
+                    <img src={`/images/Screenshot 2026-07-29 ${screenshot.file}.png`} alt={screenshot.alt} width={screenshot.width} height={screenshot.height} loading="lazy" className="h-auto w-full" />
+                  </a>
+                </figure>
+              ))}
             </div>
           </div>
-      </section>
+        </section>
 
-      <footer className="bg-[#111111] text-[#E8E4DD] py-12 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-sm font-medium">
-          <div className="flex items-center gap-4">
-            <span className="font-bold text-lg">Obskura</span>
-            <span className="text-[#E8E4DD]/40">© {new Date().getFullYear()}</span>
+        <section className="px-6 pb-20 pt-4 md:px-12 lg:px-24" aria-labelledby="outcome-heading">
+          <div className="mx-auto max-w-6xl rounded-3xl bg-text-dark p-8 text-background md:p-12">
+            <h2 id="outcome-heading" className="mb-5 text-3xl font-bold tracking-tight">Marketing and operations, connected.</h2>
+            <p className="max-w-3xl text-lg leading-relaxed text-background/80">Meta campaigns returned 16x ad spend in the first two months. Alongside that result, Comfort Moving gained a stronger local search foundation and a central workspace for managing demand through booked jobs, payments, and post-move follow-up.</p>
+            <Link to="/#contact" className="mt-8 inline-flex items-center gap-3 rounded-full bg-accent px-6 py-4 font-bold text-white hover:bg-background hover:text-text-dark">Talk about your business <ArrowRight size={18} /></Link>
           </div>
-          <div className="flex items-center gap-3 px-4 py-2 rounded border border-[#E8E4DD]/20 bg-[#1A1A1A]">
-            <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)] animate-pulse"></div>
-            <span className="font-mono text-[10px] tracking-tight text-[#E8E4DD]/70 uppercase">
-              System Operational
-            </span>
-          </div>
-        </div>
+        </section>
+      </main>
+      <footer className="border-t border-text-dark/10 px-6 py-8 md:px-12 lg:px-24">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 text-sm"><Link to="/" className="font-bold">Obskura</Link><Link to="/work-index" className="hover:text-accent">Explore more work →</Link></div>
       </footer>
     </div>
   );
