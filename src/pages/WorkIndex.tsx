@@ -35,7 +35,21 @@ const featuredWork: (ViewerItem & { scope: string; summary: string })[] = [
   },
 ];
 
-const workTiles = [
+const workTiles: ViewerItem[] = [
+  {
+    title: 'Comfort Moving — Moving Made Easy',
+    category: 'Video',
+    image: '/images/agency/comfort-moving-ad-poster.jpg',
+    video: '/images/agency/comfort-moving-ad.mp4',
+    viewer: 'video',
+  },
+  {
+    title: 'Comfort Moving — POV: You Don’t Have to Move Yourself',
+    category: 'Video',
+    image: '/images/agency/comfort-moving-pov-poster.jpg',
+    video: '/images/agency/comfort-moving-pov.mp4',
+    viewer: 'video',
+  },
   {
     title: 'Well Studios Creative',
     category: 'Content',
@@ -99,8 +113,9 @@ type ViewerItem = {
   category?: string;
   type?: string;
   image: string;
+  video?: string;
   caseStudyUrl?: string;
-  viewer?: 'image' | 'instagram';
+  viewer?: 'image' | 'instagram' | 'video';
 };
 
 const lanes = [
@@ -366,7 +381,7 @@ export default function WorkIndex() {
                   <span className="mb-3 inline-flex rounded-full bg-accent px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white">
                     {tile.category}
                   </span>
-                  {tile.viewer === 'instagram' && (
+                  {(tile.viewer === 'instagram' || tile.viewer === 'video') && (
                     <span className="mb-3 ml-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-background text-text-dark align-top">
                       <Play size={13} fill="currentColor" />
                     </span>
@@ -438,7 +453,27 @@ export default function WorkIndex() {
             <X size={22} />
           </button>
 
-          {activeViewerItem.viewer === 'instagram' ? (
+          {activeViewerItem.viewer === 'video' ? (
+            <div
+              className="w-full max-w-[430px] overflow-hidden rounded-2xl bg-black shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <video
+                key={activeViewerItem.video}
+                controls
+                autoPlay
+                playsInline
+                preload="metadata"
+                poster={activeViewerItem.image}
+                aria-label={activeViewerItem.title}
+                className="mx-auto max-h-[76dvh] w-full object-contain"
+              >
+                <source src={activeViewerItem.video} type="video/mp4" />
+                Your browser does not support video playback.
+              </video>
+              <p className="px-5 py-4 text-sm font-bold text-white">{activeViewerItem.title}</p>
+            </div>
+          ) : activeViewerItem.viewer === 'instagram' ? (
             <div
               className="w-full max-w-[430px] overflow-hidden rounded-[2rem] bg-black shadow-2xl border border-white/10"
               onClick={(event) => event.stopPropagation()}

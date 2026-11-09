@@ -1,14 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
 const team = [
   { first: 'Conall', last: 'Fahey', photo: 'conall' },
   { first: 'Teddy', last: 'Demask', photo: 'teddy' },
-  { first: 'Max', last: 'Peckinpaugh', photo: 'max' },
+  { first: 'Nick', last: 'Pinsel', photo: null },
 ];
 
 export default function TeamPage() {
+  const [members] = useState(() => {
+    const shuffled = [...team];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  });
+
   useEffect(() => {
     const previousTitle = document.title;
     document.title = 'The Team | Obskura';
@@ -33,12 +42,12 @@ export default function TeamPage() {
         </header>
 
         <section aria-label="Team members" className="border-t border-text-dark/25">
-          {team.map(person => (
-            <article key={person.photo} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-text-dark/20 py-9 sm:gap-6 md:py-12">
+          {members.map(person => (
+            <article key={`${person.first}-${person.last}`} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-text-dark/20 py-9 sm:gap-6 md:py-12">
               <h2 className="text-2xl font-medium leading-[1.1] tracking-[-0.035em] sm:text-4xl md:text-5xl lg:text-6xl">
                 {person.first} <span className="font-serif font-normal italic">{person.last}</span>
               </h2>
-              <div className="size-16 overflow-hidden rounded-full bg-primary ring-1 ring-text-dark/15 sm:size-24 md:size-28">
+              {person.photo && <div className="size-16 overflow-hidden rounded-full bg-primary ring-1 ring-text-dark/15 sm:size-24 md:size-28">
                 <img
                   src={`/images/team/${person.photo}.webp`}
                   alt=""
@@ -46,7 +55,7 @@ export default function TeamPage() {
                   height="512"
                   className="size-full origin-[50%_36%] scale-150 object-cover"
                 />
-              </div>
+              </div>}
             </article>
           ))}
         </section>

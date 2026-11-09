@@ -51,6 +51,8 @@ const contactEmail = 'conall@obskuraagency.com';
 const productionVideos = [
   { title: 'On the Job', file: 'umbrella-roofing-03.mp4', poster: 'umbrella-03-poster-selected.jpg' },
   { title: 'Client Story', file: 'umbrella-roofing-01.mp4', poster: 'umbrella-01-poster-selected.jpg' },
+  { title: 'Comfort Moving — Moving Made Easy', file: 'comfort-moving-ad.mp4', poster: 'comfort-moving-ad-poster.jpg' },
+  { title: 'Comfort Moving — POV: You Don’t Have to Move Yourself', file: 'comfort-moving-pov.mp4', poster: 'comfort-moving-pov-poster.jpg' },
 ];
 
 export default function App() {
